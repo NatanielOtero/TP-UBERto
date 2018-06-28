@@ -1,0 +1,30 @@
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%">
+<p-card title="Ingrese sus datos" style="text-align: center" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+  
+        <div class="ui-inputgroup" >
+ 
+            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+            <input type="text" style="width: 100%"  [(ngModel)]="user" placeholder="Usuario">
+               </div>
+
+        <div class="ui-inputgroup" >
+            <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+            <input type="password" style="width: 100%" [(ngModel)]="pass" placeholder="Contraseña" />   
+        </div>    
+      
+    
+      
+    <p-footer>
+        <button pButton type="button" label="Ingresar" (click)="iniciar()" icon="fa-check"></button> 
+        
+      
+    </p-footer>
+</p-card>
+</div>
+
+<p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Error" [(visible)]="isError">
+    {{error}}                      
+  </p-dialog>

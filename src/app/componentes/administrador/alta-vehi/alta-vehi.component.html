@@ -1,0 +1,47 @@
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%">
+<p-card title="Ingrese los datos del vehiculo" style="text-align: center" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+  
+    <form  [formGroup]="vehiculoForm" (ngSubmit)="Registrar()">
+        <div class="ui-inputgroup" >
+ 
+            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+            <input type="text" style="width: 100%" pattern=".{6,6}"  placeholder="Patente" name="patente" [formControl]="patente" required>
+               </div>
+
+        <div class="ui-inputgroup" >
+            <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+            <input type="text" style="width: 100%"  placeholder="Marca" name="marca" [formControl]="marca" required />   
+        </div> 
+        
+        <div class="ui-inputgroup" >
+          <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+          <input type="text" style="width: 100%"  placeholder="Modelo" name="modelo" [formControl]="modelo" required />   
+      </div>   
+    
+      
+       
+           
+        
+      
+    
+      
+    <p-footer>         
+         
+        <button pButton type="submit" label="Agregar vehiculo"  [disabled]="!vehiculoForm.valid" icon="fa-check"></button> 
+        
+      
+    </p-footer>
+
+    </form>
+</p-card>
+</div>
+
+<p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Error" [(visible)]="error">
+   {{errMsg}}               
+  </p-dialog>
+  <p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Mensaje" [(visible)]="acierto">
+    {{msg}}               
+</p-dialog>

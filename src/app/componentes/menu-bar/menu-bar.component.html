@@ -1,0 +1,13 @@
+<p-menubar [model]="items" >    
+  <div>
+     Sesion Iniciada como : {{usuario.user}}
+     <button  pButton label="Logout"  (click)="logout()"  ></button>
+  </div>
+ 
+</p-menubar>
+<p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Alta empleado" [(visible)]="showAlta">
+  <app-alta-us></app-alta-us>
+</p-dialog>
+<p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Alta vehiculo" [(visible)]="showVehi">
+<app-alta-vehi></app-alta-vehi>
+</p-dialog>

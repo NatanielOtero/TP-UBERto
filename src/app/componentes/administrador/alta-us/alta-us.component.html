@@ -1,0 +1,47 @@
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%">
+<p-card title="Ingrese los datos del empleado" style="text-align: center" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+  
+    <form  [formGroup]="registroForm" (ngSubmit)="Registrar()">
+        <div class="ui-inputgroup" >
+ 
+            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+            <input type="text" style="width: 100%"  placeholder="Usuario" name="user" [formControl]="user" required>
+               </div>
+
+        <div class="ui-inputgroup" >
+            <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+            <input type="password" style="width: 100%"  placeholder="Contraseña(min 6 carac)" name="clave" [formControl]="clave" required />   
+        </div>   
+        <br>
+        <div class="ui-inputgroup">
+          
+          <div style="width: 100%">
+            <p-selectButton [options]="types" [formControl]="nivel" name="nivel"  required></p-selectButton>
+          </div>         
+         </div>
+         <br>
+       
+           
+        
+      
+    
+      
+    <p-footer>
+        <button pButton type="submit" label="Agregar empleado"  [disabled]="!registroForm.valid" icon="fa-check"></button> 
+        
+      
+    </p-footer>
+
+    </form>
+</p-card>
+</div>
+
+<p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Error" [(visible)]="error">
+   {{errMsg}}               
+  </p-dialog>
+  <p-dialog  autoAlign="true" width=100%  focusOnShow="false" header="Mensaje" [(visible)]="acierto">
+    {{msg}}               
+</p-dialog>
