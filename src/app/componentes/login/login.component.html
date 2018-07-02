@@ -3,7 +3,13 @@
   align-items: center;
   margin-top: 10%">
 <p-card title="Ingrese sus datos" style="text-align: center" [style]="{width: '360px'}" styleClass="ui-card-shadow">
-  
+    
+    <button pButton type="button" label="Admin" (click)="admin()" icon="fa-check"></button> 
+    <button pButton type="button" label="Chofer" (click)="chofer()" icon="fa-check"></button> 
+    <button pButton type="button" label="Cliente" (click)="cliente()" icon="fa-check"></button> 
+    <br>
+    <br>
+    <br>
         <div class="ui-inputgroup" >
  
             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>

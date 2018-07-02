@@ -10,11 +10,20 @@ const jwt : JwtHelperService = new JwtHelperService();
 export class AutheService {
 
 
+
   
   constructor() {
     
    }
+   public getUser() : string{
+     
 
+     let token = this.getToken();
+     let datos = jwt.decodeToken(token);
+     let user = datos.data.user;
+     console.log(user + "autheServ");
+     return user;
+   }
    public getToken() : string {
      return localStorage.getItem('token');
    }

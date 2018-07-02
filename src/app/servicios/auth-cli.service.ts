@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthAdminService implements CanActivate {
+export class AuthCliService {
 
   helper = new JwtHelperService();
   token = null;
@@ -13,10 +12,10 @@ export class AuthAdminService implements CanActivate {
    
   
   canActivate() {
-   
+  
     if(this.user != null)
     { 
-      if(this.user.nivel == 1)
+      if(this.user.nivel == 3)
       {
         return true;
       }
@@ -28,10 +27,17 @@ export class AuthAdminService implements CanActivate {
 
   constructor() { 
     this.token = localStorage.getItem("token");
-    console.log(this.token);
+   
     let datos = this.helper.decodeToken(this.token);
-    this.user = datos.data;
-    console.log(this.user);
+    if(datos != null)
+    {
+      this.user = datos.data;
+    }
+    else
+    {
+        this.user = null;
+    }
+ 
 
   }
 }

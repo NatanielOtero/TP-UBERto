@@ -18,6 +18,9 @@ export class MenuPrincipalComponent implements OnInit {
   usuario = new Usuario();
   helper = new JwtHelperService();
   constructor (public serv : UsuariosService,public tokenServ : AutheService,public router : Router,public routes : ActivatedRoute) {
+    
+  }
+  ngOnInit() {
     this.token = this.tokenServ.getToken();
     let payload = this.helper.decodeToken(this.token);
     this.usuario = payload.data;
@@ -27,18 +30,15 @@ export class MenuPrincipalComponent implements OnInit {
         this.router.navigate(['/AdminPrin']);  
         break;
       case 2:
-
+        
         break;
       case 3:
-
+        this.router.navigate(['/CliPrin']);  
         break;
     
       default:
         break;
     }
-  }
-  ngOnInit() {
-    
   }
   probando(){
     let usuarios ;

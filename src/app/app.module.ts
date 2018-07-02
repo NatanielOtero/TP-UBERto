@@ -25,6 +25,12 @@ import { MenuAdminComponent } from './componentes/administrador/menu-admin/menu-
 import { AltaUsComponent } from './componentes/administrador/alta-us/alta-us.component';
 import { AdministracionComponent } from './componentes/administrador/administracion/administracion.component';
 import { AltaVehiComponent } from './componentes/administrador/alta-vehi/alta-vehi.component';
+import { ClientesComponent } from './componentes/cli/clientes/clientes.component';
+import { PedirViajeComponent } from './componentes/cli/pedir-viaje/pedir-viaje.component';
+import { MenuClientComponent } from './componentes/cli/menu-client/menu-client.component';
+import { CliViajesComponent } from './componentes/cli/cli-viajes/cli-viajes.component';
+import { ComodPipe } from './pipes/comod.pipe';
+import { EstPipe } from './pipes/est.pipe';
 
   
 @NgModule({
@@ -38,7 +44,13 @@ import { AltaVehiComponent } from './componentes/administrador/alta-vehi/alta-ve
     MenuAdminComponent,
     AltaUsComponent,
     AdministracionComponent,
-    AltaVehiComponent
+    AltaVehiComponent,
+    ClientesComponent,
+    PedirViajeComponent,
+    MenuClientComponent,
+    CliViajesComponent,
+    ComodPipe,
+    EstPipe
   ],
   imports: [
     CommonModule, 
@@ -54,15 +66,14 @@ import { AltaVehiComponent } from './componentes/administrador/alta-vehi/alta-ve
         tokenGetter : () => {
           let token;
           token  = localStorage.getItem('token');
-          console.log(token);
+         
           return token;
         },
       whitelistedDomains: ['localhost' , 'localhost:8080' , 'localhost:4200']  
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBGcPKjwDCPtMSuDd7KhNT9EB1lKcUcxQ0',
-      libraries: ["places"]
+      apiKey: 'AIzaSyBGcPKjwDCPtMSuDd7KhNT9EB1lKcUcxQ0',      
     }),
     ReactiveFormsModule,
     AgmDirectionModule 

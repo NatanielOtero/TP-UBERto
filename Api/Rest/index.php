@@ -7,6 +7,7 @@ require '../composer/vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
 require_once './clases/usuarioApi.php';
 require_once './clases/vehiculoApi.php';
+require_once './clases/viajesApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -58,7 +59,8 @@ $app->group('/Chofer', function () {
 
 $app->group('/Usuario', function () {
   
-  
+  $this->post('/PedirViaje', \viajesApi::class . ':AltaViaje');
+  $this->get('/ViajesUsuario', \viajesApi::class . ':traerViajesUs');
  
   
 });

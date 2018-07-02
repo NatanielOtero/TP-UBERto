@@ -15,9 +15,7 @@ export class AuthWardService implements CanActivate {
    
   
   canActivate() {
-    console.log("AlwaysAuthGuard");
-    console.log(this.user.user);
-    console.log(this.user.nivel);
+   
     if(this.user != null)
     {
       return true;
@@ -27,11 +25,10 @@ export class AuthWardService implements CanActivate {
 
 
   constructor() { 
-    this.token = localStorage.getItem("token");
-    console.log(this.token);
+    this.token = localStorage.getItem("token");    
     let datos = this.helper.decodeToken(this.token);
     this.user = datos.data;
-    console.log(this.user);
+    
 
   }
 }

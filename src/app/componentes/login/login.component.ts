@@ -22,7 +22,22 @@ export class LoginComponent implements OnInit {
     this.usuario = new Usuario();
 
    }
-  
+   admin()
+   {
+      this.user = "admin";
+      this.pass = "1234";
+   }
+   chofer()
+   {
+      this.user = "chofer";
+      this.pass = "1234";
+   }
+   cliente()
+   {
+     this.user = "cliente";
+     this.pass = "1234";
+   }
+
    iniciar() {
     this.usuario.pass = this.pass;
     this.usuario.user = this.user;

@@ -10,7 +10,9 @@ import {MatButtonModule} from '@angular/material';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {SelectButtonModule} from 'primeng/selectbutton';
-
+import {DropdownModule} from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   imports: [
@@ -23,7 +25,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     MatButtonModule,
     ButtonModule,
     DialogModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DropdownModule,
+    CalendarModule,
+    TableModule
     
   ],
   exports:[
@@ -35,8 +40,11 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     MatButtonModule,
     ButtonModule,
     DialogModule,
-    SelectButtonModule
-  ],
+    SelectButtonModule,
+    DropdownModule,
+    CalendarModule,
+    TableModule
+  ],  
   declarations: []
 })
 export class VisualesModule { }

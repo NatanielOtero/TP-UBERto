@@ -1,0 +1,15 @@
+agm-map {
+    height: 400px;
+  
+  }
+
+  .banner{
+
+
+
+    background-image: url("../../../../assets/images/cli.png");
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-size: cover; 
+    height: 650px;
+}

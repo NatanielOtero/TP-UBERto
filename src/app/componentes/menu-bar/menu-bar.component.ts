@@ -19,6 +19,7 @@ export class MenuBarComponent implements OnInit {
   isLogged = false;
   showAlta = false;
   showVehi = false;
+  showViaje = false;
   constructor(public router : Router, public routes : ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,10 +27,10 @@ export class MenuBarComponent implements OnInit {
     if(this.token != null)
     {
       let datos = this.helper.decodeToken(this.token);
-      console.log(datos);
+     
       this.usuario = datos.data;
       this.name = datos.data.user;      
-      console.log(this.usuario.nivel + "bar");
+    
       if(this.usuario != null)
       {
         this.isLogged = true;       
@@ -54,26 +55,28 @@ export class MenuBarComponent implements OnInit {
               items: [
               {label: 'Alta Empleados',command: (event) => {
                this.showAlta = true;
-               }},  
+               },
+               icon: 'fa fa-fw fa-plus',},  
               {label: 'Alta Vehiculos',command: (event) => {
                 this.showVehi = true;
-                }},             
+                },
+                icon: 'fa fa-fw fa-plus'},             
               ]
              
           },
           {
               label: 'Listado de Viajes',
-              icon: 'fa fa-fw fa-plus',        
+             
              
           },
           {
               label: 'Historial de Viajes', 
-              icon: 'fa fa-fw fa-plus',       
+                 
            
           },
           {
             label: 'Informes',  
-            icon: 'fa fa-fw fa-plus',      
+               
            
           },
          ];
@@ -82,7 +85,7 @@ export class MenuBarComponent implements OnInit {
         this.items = [
           {
               label: 'Viajes asignados',
-              icon: 'fa fa-fw fa-plus',
+              
              
           }                  
          ];
@@ -91,12 +94,14 @@ export class MenuBarComponent implements OnInit {
         this.items = [
           {
               label: 'Solicitar viaje',
-              icon: 'fa fa-fw fa-plus',
+              routerLink: '/CliPrin/Viaje'
+              
+              
              
           },
           {
               label: 'Listado de Viajes', 
-              icon: 'fa fa-fw fa-plus',       
+              routerLink: '/CliPrin/CliViaje'    
              
           }
          ];

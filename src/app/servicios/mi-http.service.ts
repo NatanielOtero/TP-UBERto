@@ -27,6 +27,7 @@ export class MiHttpService {
     return this.http.post(url,objeto)
     .toPromise()
     .then(this.darDatos)
+    //.then(data => {console.log(data)})
     .catch( err => console.error(err));
   }
   

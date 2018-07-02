@@ -10,6 +10,11 @@ import { MenuAdminComponent } from '../../componentes/administrador/menu-admin/m
 import { AuthAdminService } from '../../servicios/auth-admin.service';
 import { AltaUsComponent } from '../../componentes/administrador/alta-us/alta-us.component';
 import { AdministracionComponent } from '../../componentes/administrador/administracion/administracion.component';
+import { ClientesComponent } from '../../componentes/cli/clientes/clientes.component';
+import { AuthCliService } from '../../servicios/auth-cli.service';
+import { MenuClientComponent } from '../../componentes/cli/menu-client/menu-client.component';
+import { PedirViajeComponent } from '../../componentes/cli/pedir-viaje/pedir-viaje.component';
+import { CliViajesComponent } from '../../componentes/cli/cli-viajes/cli-viajes.component';
 
 
 
@@ -21,9 +26,14 @@ const MiRuteo = [
   {path: 'Principal' ,component: MenuPrincipalComponent, canActivate: [AuthWardService]},
   {path: 'AdminPrin' ,component: MenuAdminComponent, canActivate: [AuthAdminService],
     children:[
-     {path:'',component: AdministracionComponent , canActivate: [AuthAdminService]},
-     {path:'AltaUs',component: AltaUsComponent , canActivate: [AuthAdminService]}
+     {path:'',component: AdministracionComponent , canActivate: [AuthAdminService]}  
   
+  ]},
+  {path: 'CliPrin',component: MenuClientComponent,canActivate: [AuthCliService],
+    children:[
+      {path:'',component:ClientesComponent,canActivate:[AuthCliService]},
+      {path:'Viaje',component:PedirViajeComponent,canActivate:[AuthCliService]},
+      {path:'CliViaje',component:CliViajesComponent,canActivate:[AuthCliService]}
   ]},
 
 
@@ -44,7 +54,9 @@ const MiRuteo = [
     
   ],
   providers:[
-    AuthWardService
+    AuthWardService,
+    AuthAdminService,
+    AuthCliService
   ],
   declarations: []
 })
