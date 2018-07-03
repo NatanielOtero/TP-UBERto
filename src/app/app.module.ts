@@ -31,6 +31,10 @@ import { MenuClientComponent } from './componentes/cli/menu-client/menu-client.c
 import { CliViajesComponent } from './componentes/cli/cli-viajes/cli-viajes.component';
 import { ComodPipe } from './pipes/comod.pipe';
 import { EstPipe } from './pipes/est.pipe';
+import { ConfirmationService } from 'primeng/api';
+import { ModificarViajeComponent } from './componentes/cli/modificar-viaje/modificar-viaje.component';
+import { ListadoVehiculosComponent } from './componentes/administrador/listado-vehiculos/listado-vehiculos.component';
+import { HistorialViajesComponent } from './componentes/administrador/historial-viajes/historial-viajes.component';
 
   
 @NgModule({
@@ -50,7 +54,10 @@ import { EstPipe } from './pipes/est.pipe';
     MenuClientComponent,
     CliViajesComponent,
     ComodPipe,
-    EstPipe
+    EstPipe,
+    ModificarViajeComponent,
+    ListadoVehiculosComponent,
+    HistorialViajesComponent
   ],
   imports: [
     CommonModule, 
@@ -81,7 +88,7 @@ import { EstPipe } from './pipes/est.pipe';
     
   
   ],
-  providers: [UsuariosService, MiHttpService,
+  providers: [UsuariosService, MiHttpService, ConfirmationService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

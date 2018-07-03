@@ -10,7 +10,12 @@ export class Viaje {
     lonDes;
     pago;
     comodidad;
+    estado;
    
   
   
+}
+
+export class ViajeMod extends Viaje  {
+    cod_Viaje;
 }

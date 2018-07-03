@@ -7,9 +7,9 @@
     <form  [formGroup]="registroForm" (ngSubmit)="Registrar()">
         <div class="ui-inputgroup" >
  
-            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-            <input type="text" style="width: 100%"  placeholder="Usuario" name="user" [formControl]="user" required>
-               </div>
+        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+        <input type="text" style="width: 100%"  placeholder="Usuario" name="user" [formControl]="user" required>
+        </div>
 
         <div class="ui-inputgroup" >
             <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
@@ -19,11 +19,21 @@
         <div class="ui-inputgroup">
           
           <div style="width: 100%">
-            <p-selectButton [options]="types" [formControl]="nivel" name="nivel"  required></p-selectButton>
+            <p-selectButton [options]="types" [formControl]="nivel" name="nivel"  (onChange)="verificarChofer()" required></p-selectButton>
           </div>         
          </div>
          <br>
-       
+
+
+        <div [hidden]="isChofer">      
+         <div class="ui-inputgroup" >
+          
+            <div style="width: 100%">
+              <p-selectButton [options]="typesComo" [(ngModel)]="comodidad"  [ngModelOptions]="{standalone: true}" name="comodidad"   required></p-selectButton>
+            </div>         
+           </div>
+           <br>
+        </div>
            
         
       

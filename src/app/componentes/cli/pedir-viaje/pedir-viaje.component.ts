@@ -51,7 +51,7 @@ export class PedirViajeComponent implements OnInit {
     this.user = datos.data.user;
     this.viaje = new Viaje();
     this.op = [
-      {label:'Seleccione punto de partida...', value:null},   
+      {label:'Seleccione origen y destino...', value:null},   
       {label:'Origen', value:"O"},
       {label:'Destino', value:"D"}
       

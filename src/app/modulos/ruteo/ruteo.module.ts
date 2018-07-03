@@ -15,6 +15,9 @@ import { AuthCliService } from '../../servicios/auth-cli.service';
 import { MenuClientComponent } from '../../componentes/cli/menu-client/menu-client.component';
 import { PedirViajeComponent } from '../../componentes/cli/pedir-viaje/pedir-viaje.component';
 import { CliViajesComponent } from '../../componentes/cli/cli-viajes/cli-viajes.component';
+import { ModificarViajeComponent } from '../../componentes/cli/modificar-viaje/modificar-viaje.component';
+import { ListadoVehiculosComponent } from '../../componentes/administrador/listado-vehiculos/listado-vehiculos.component';
+import { HistorialViajesComponent } from '../../componentes/administrador/historial-viajes/historial-viajes.component';
 
 
 
@@ -26,14 +29,17 @@ const MiRuteo = [
   {path: 'Principal' ,component: MenuPrincipalComponent, canActivate: [AuthWardService]},
   {path: 'AdminPrin' ,component: MenuAdminComponent, canActivate: [AuthAdminService],
     children:[
-     {path:'',component: AdministracionComponent , canActivate: [AuthAdminService]}  
+     {path:'',component: AdministracionComponent , canActivate: [AuthAdminService]},
+     {path:'ListViaje',component:ListadoVehiculosComponent,canActivate:[AuthAdminService]},
+     {path:'HistViaje',component:HistorialViajesComponent,canActivate:[AuthAdminService]}
   
   ]},
   {path: 'CliPrin',component: MenuClientComponent,canActivate: [AuthCliService],
     children:[
       {path:'',component:ClientesComponent,canActivate:[AuthCliService]},
       {path:'Viaje',component:PedirViajeComponent,canActivate:[AuthCliService]},
-      {path:'CliViaje',component:CliViajesComponent,canActivate:[AuthCliService]}
+      {path:'CliViaje',component:CliViajesComponent,canActivate:[AuthCliService]},
+      {path:'ModViaje',component:ModificarViajeComponent,canActivate:[AuthCliService]}
   ]},
 
 

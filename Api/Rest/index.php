@@ -8,6 +8,7 @@ require_once './clases/AccesoDatos.php';
 require_once './clases/usuarioApi.php';
 require_once './clases/vehiculoApi.php';
 require_once './clases/viajesApi.php';
+require_once './clases/choferApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -43,9 +44,11 @@ $app->group('/Publico', function () {
 $app->group('/Administrador', function () {
   
   $this->post('/Alta', \userApi::class . ':Registro');
+  $this->post('/AltaChofer', \choferApi::class . ':AltaChofer');
   $this->post('/AltaVehi', \vehiculoApi::class . ':AltaVehiculo');
   $this->get('/traer',\userApi::class . ':TraerAll');
- 
+  $this->get('/traerChoferes',\choferApi::class . ':TraerAll');
+  $this->get('/Viajes', \viajesApi::class . ':traerViajesUs');
   
 })->add(\MWparaAutentificar::class . ':VerificarAdministrador');
 
@@ -61,9 +64,10 @@ $app->group('/Usuario', function () {
   
   $this->post('/PedirViaje', \viajesApi::class . ':AltaViaje');
   $this->get('/ViajesUsuario', \viajesApi::class . ':traerViajesUs');
- 
+  $this->delete('/BorrarViaje',\viajesApi::class . ':BorrarViaje');
+  $this->put('/ModViaje',\viajesApi::class . ':ModificarViaje');
   
-});
+})->add(\MWparaAutentificar::class . ':VerificarUsuario');
 
 
 

@@ -9,11 +9,15 @@ export class EstPipe implements PipeTransform {
     let retorno ;
    if(value == 1)
    {
-     retorno = "Pendiente de asignar";
+     retorno = "Pendiente";
    }
    if(value==2)
    {
-    retorno = "Viaje ya asignado";
+    retorno = "En Curso";
+   }
+   if(value==3)
+   {
+    retorno = "Finalizado";
    }
 
    return retorno;

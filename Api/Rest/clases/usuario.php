@@ -41,7 +41,7 @@
           VALUES('$this->user','$this->pass',$this->nivel)");
           return $consulta->execute();
          
-    }
+    }    
     /*
     public static function traerUs($id)
     {

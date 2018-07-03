@@ -4,7 +4,7 @@
 
   class viajes{
 
-    
+    public $cod_Viaje;
     public $fecha;
     public $comodidad;
     public $pago;
@@ -38,6 +38,39 @@
           $consulta->execute();
           return $consulta->fetchAll(PDO::FETCH_CLASS, "viajes");*/
          
+    }
+    public function bajaViaje()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+          DELETE FROM `viajes` 
+          WHERE cod_Viaje=:id");
+          $consulta->bindValue(':id',$this->cod_Viaje, PDO::PARAM_INT);
+          $consulta->execute();
+          return $consulta->rowCount();
+    }
+    public function modViaje()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+        UPDATE `viajes` SET
+          `fecha`=:fe,
+          `comodidad`=:com,
+          `pago`=:pag,
+          `latOr`=:lto,
+          `lonOr`=:lno,
+          `latDes`=:ltd,
+          `lonDes`=:lnd 
+        WHERE cod_Viaje =:id");
+        $consulta->bindValue(':id',$this->cod_Viaje);
+        $consulta->bindValue(':fe',$this->fecha);
+        $consulta->bindValue(':com',$this->comodidad);
+        $consulta->bindValue(':pag', $this->pago);
+        $consulta->bindValue(':lto', $this->latOr);
+        $consulta->bindValue(':lno', $this->lonOr);
+        $consulta->bindValue(':ltd', $this->latDes);
+        $consulta->bindValue(':lnd', $this->lonDes);
+        return $consulta->execute();
     }
 
   }

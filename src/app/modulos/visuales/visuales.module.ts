@@ -13,7 +13,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +28,8 @@ import {TableModule} from 'primeng/table';
     SelectButtonModule,
     DropdownModule,
     CalendarModule,
-    TableModule
+    TableModule,
+    ConfirmDialogModule
     
   ],
   exports:[
@@ -43,7 +44,8 @@ import {TableModule} from 'primeng/table';
     SelectButtonModule,
     DropdownModule,
     CalendarModule,
-    TableModule
+    TableModule,
+    ConfirmDialogModule
   ],  
   declarations: []
 })

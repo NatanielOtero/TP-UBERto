@@ -66,13 +66,13 @@ export class MenuBarComponent implements OnInit {
           },
           {
               label: 'Listado de Viajes',
-             
+              routerLink: '/AdminPrin/ListViaje'    
              
           },
           {
               label: 'Historial de Viajes', 
-                 
-           
+              routerLink: '/AdminPrin/HistViaje'   
+             
           },
           {
             label: 'Informes',  

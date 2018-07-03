@@ -1,19 +1,15 @@
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable} from '@angular/core';
 import { Http, RequestOptions, Response } from "@angular/http";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { throwError } from 'rxjs';
+
 
 
 @Injectable()
-export class MiHttpService {
+export class MiHttpService  {
   token = localStorage.getItem('token');
   constructor(public http: HttpClient) { }
-
-  /*public traer(url:string)
-  {
-    
-    return this.http.get(url, { headers: new HttpHeaders({'Authorization': 'Bearer' + this.token})
-    }).toPromise().then(this.darDatos).catch(err => console.error(err));
-  }*/
+ 
  public traer(url:string)
   {
     return this.http.get(url)
@@ -37,6 +33,22 @@ export class MiHttpService {
     
     return this.http.post(url, objeto)
       .toPromise()     
+      .then(this.darDatos)
+      .catch(this.handleError);
+  }
+  public delete(url: string, objeto: any) {
+    this.http.request('DELETE',url,{
+      body: objeto
+    })
+    .toPromise()
+    .then(this.darDatos)
+    .catch(this.handleError); 
+      
+ 
+  }
+  public put(url: string, objeto: any) {
+    return this.http.put(url,objeto)
+      .toPromise()
       .then(this.darDatos)
       .catch(this.handleError);
   }
@@ -76,12 +88,17 @@ export class MiHttpService {
     return resp.json() || {};
 
   }
-  private handleError(error: Response | any) {
-
+  public handleError(error: Error) {
+    
+    console.log('It happens: ', error);
+    throwError( new Error(error.message)); 
+    //throw new Error(error.message);  
     return error;
-  }
+ }
+ 
 
   darDatos(dato) {
+    console.log(dato);
     /*let data
     data = JSON.parse(dato["_body"]);
     console.log(dato);*/

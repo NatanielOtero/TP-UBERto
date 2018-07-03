@@ -26,12 +26,22 @@ export class UsuariosService {
   {
     return  this.http.Alta(this.url + "/Administrador/Alta" , usuario);   
   }   
+  AltaChofer(chofer)
+  {
+    return  this.http.Alta(this.url + "/Administrador/AltaChofer" , chofer);   
+  } 
+  traerChoferes()
+  {
+   
+    return this.http.traer(this.url +  "/Administrador/traerChoferes");
+   
+  }
+  
      
   ObtenerUsuarios()
   {
-    let respuesta;
-    respuesta = this.http.traer(this.url +  "/Administrador/traer");
-    console.log(respuesta);
-    return respuesta;
+   
+    return  this.http.traer(this.url +  "/Administrador/traer");
+   
   }
 }

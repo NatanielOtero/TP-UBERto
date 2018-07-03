@@ -4,3 +4,8 @@ export class Usuario {
     nivel:number;
   
 }
+
+export class Chofer{
+    user:string;
+    comodidad:number;
+}
