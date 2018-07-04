@@ -18,6 +18,10 @@ import { CliViajesComponent } from '../../componentes/cli/cli-viajes/cli-viajes.
 import { ModificarViajeComponent } from '../../componentes/cli/modificar-viaje/modificar-viaje.component';
 import { ListadoVehiculosComponent } from '../../componentes/administrador/listado-vehiculos/listado-vehiculos.component';
 import { HistorialViajesComponent } from '../../componentes/administrador/historial-viajes/historial-viajes.component';
+import { AuthChofService } from '../../servicios/auth-chof.service';
+import { MenuChoferComponent } from '../../componentes/chofer/menu-chofer/menu-chofer.component';
+import { ChoferesComponent } from '../../componentes/chofer/choferes/choferes.component';
+import { ViajesChoferComponent } from '../../componentes/chofer/viajes-chofer/viajes-chofer.component';
 
 
 
@@ -41,6 +45,12 @@ const MiRuteo = [
       {path:'CliViaje',component:CliViajesComponent,canActivate:[AuthCliService]},
       {path:'ModViaje',component:ModificarViajeComponent,canActivate:[AuthCliService]}
   ]},
+  {path: 'ChofPrin',component: MenuChoferComponent,canActivate: [AuthChofService],
+    children:[
+      {path:'',component:ChoferesComponent,canActivate:[AuthChofService]},
+      {path:'ChofViaje',component:ViajesChoferComponent,canActivate:[AuthChofService]},
+     
+  ]},
 
 
 
@@ -62,7 +72,8 @@ const MiRuteo = [
   providers:[
     AuthWardService,
     AuthAdminService,
-    AuthCliService
+    AuthCliService,
+    AuthChofService
   ],
   declarations: []
 })

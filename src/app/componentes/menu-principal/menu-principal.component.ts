@@ -30,7 +30,7 @@ export class MenuPrincipalComponent implements OnInit {
         this.router.navigate(['/AdminPrin']);  
         break;
       case 2:
-        
+      this.router.navigate(['/ChofPrin']);  
         break;
       case 3:
         this.router.navigate(['/CliPrin']);  

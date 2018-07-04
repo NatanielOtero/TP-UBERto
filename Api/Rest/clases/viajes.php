@@ -13,6 +13,7 @@
     public $latDes;
     public $lonDes;
     public $user;
+   
     
 
     public function pedirViaje()
@@ -72,6 +73,7 @@
         $consulta->bindValue(':lnd', $this->lonDes);
         return $consulta->execute();
     }
+   
 
   }
 

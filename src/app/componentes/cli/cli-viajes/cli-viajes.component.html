@@ -28,8 +28,8 @@
                                 <td>{{viaje.estado | est}}</td>  
                                 <td>
                                       
-                                  <button pButton  type="button" label="Eliminar"  class="ui-button-danger"></button> 
-                                  <button pButton type="button" label="Modificar"  class="ui-button-info"></button> 
+                                  <button pButton  type="button" label="Eliminar" (click)="Eliminar(viaje.cod_Viaje)"  class="ui-button-danger"></button> 
+                                  <button pButton type="button" label="Modificar" (click)="Modificar(viaje.cod_Viaje)" class="ui-button-info"></button> 
                                 </td>                      
                             </tr>
                         </ng-template>

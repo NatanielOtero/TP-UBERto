@@ -6,6 +6,7 @@ import {ConfirmationService} from 'primeng/api';
 import {SelectItem} from 'primeng/api';
 import { Router, Routes, ActivatedRoute } from '@angular/router';
 import { UsuariosService } from '../../../servicios/usuarios.service';
+import { viajeCHofer } from '../../../clases/viaje-chofer';
 
 @Component({
   selector: 'app-listado-vehiculos',
@@ -15,14 +16,15 @@ import { UsuariosService } from '../../../servicios/usuarios.service';
 export class ListadoVehiculosComponent implements OnInit {
  
   viajes:any[];
-  
+  viajeAsig = new viajeCHofer();
   cols: any[];
   info : boolean = false;
   msg : string;
   modo: SelectItem[];
   op : boolean = false;
+  asig = false;
   remiserosAcordes:any[];
-  constructor(public service : ViajesService,public users : UsuariosService,public authe : AutheService,private confirmationService: ConfirmationService, private router : Router, route: ActivatedRoute, ) { 
+  constructor(public service : ViajesService,public aux : AutheService,public users : UsuariosService,public authe : AutheService,private confirmationService: ConfirmationService, private router : Router, route: ActivatedRoute, ) { 
     this.cols = [
       { field: 'fecha', header: 'Fecha' },
       { field: 'comodidad', header: 'Comodidad' },
@@ -32,6 +34,7 @@ export class ListadoVehiculosComponent implements OnInit {
     {label:'Viajes Pendientes', value:false},
     {label:'Viajes Realizados', value:true},    
   ];
+
   }
 
   asignarViaje(cod_viaje)
@@ -52,17 +55,66 @@ export class ListadoVehiculosComponent implements OnInit {
           this.remiserosAcordes.push(element);
         }
       });
+      if(this.remiserosAcordes.length == 0)
+      {
+        
+        this.info = true;
+        this.msg = "No hay remiseros que cumplan con los requisitos";
+      }else
+      {
+        this.viajeAsig.cod_Viaje = cod_viaje;
+        this.viajeAsig.estado = 2;
+        this.asig = true;
+      }
      } 
     ).catch(err=>{console.log(err)});
-    if(this.remiserosAcordes.length == 0)
-    {
-      this.info = true;
-      this.msg = "No hay remiseros que cumplan con los requisitos";
-    }
+ 
     console.log(viaje);
     console.log(this.remiserosAcordes);
     
 
+  }
+  asignarChofer(chofer)
+  {
+    this.viajeAsig.chofer = chofer;
+    this.viajeAsig.estado = 2;
+    console.log(this.viajeAsig);
+    
+    
+    this.service.asignarViaje(this.viajeAsig).then(
+      data => {
+        if(data)
+        {
+          this.service.cambiarEstado(this.viajeAsig).then(
+            data2 => {
+              if(data2)
+              {
+                this.info = true;
+                this.msg = "Viaje asignado a: " + chofer;
+                this.asig = false;
+                this.aux.pausa(5000);
+                window.location.reload();
+                
+                
+              }
+              else
+              {
+                this.info = true;
+                this.msg = "Viaje no asignado";
+              }
+
+            }
+          )
+         
+          
+        }
+        else
+        {
+          this.info = true;
+          this.msg = "Viaje no asignado";
+        }
+      }
+    )
   }
 
   ngOnInit() {

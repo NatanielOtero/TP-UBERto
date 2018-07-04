@@ -9,6 +9,7 @@ require_once './clases/usuarioApi.php';
 require_once './clases/vehiculoApi.php';
 require_once './clases/viajesApi.php';
 require_once './clases/choferApi.php';
+require_once './clases/viajeChoferApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -43,19 +44,25 @@ $app->group('/Publico', function () {
 
 $app->group('/Administrador', function () {
   
-  $this->post('/Alta', \userApi::class . ':Registro');
-  $this->post('/AltaChofer', \choferApi::class . ':AltaChofer');
-  $this->post('/AltaVehi', \vehiculoApi::class . ':AltaVehiculo');
+  //MANEJO DE USUARIOS
   $this->get('/traer',\userApi::class . ':TraerAll');
+  $this->post('/Alta', \userApi::class . ':Registro');
+  //MANEJO VEHICULOS
+  $this->post('/AltaVehi', \vehiculoApi::class . ':AltaVehiculo');
+  //MANEJO CHOFERES
+  $this->post('/AltaChofer', \choferApi::class . ':AltaChofer');
   $this->get('/traerChoferes',\choferApi::class . ':TraerAll');
+  //MANEJO VIAJES
+  $this->post('/AsigViaje', \viajeChoferApi::class . ':AsignarViaje');
   $this->get('/Viajes', \viajesApi::class . ':traerViajesUs');
+  $this->put('/EstadoViaje',\viajeChoferApi::class . ':cambiarEstadoViaje');
   
 })->add(\MWparaAutentificar::class . ':VerificarAdministrador');
 
 $app->group('/Chofer', function () {
   
-  
-
+  $this->get('/ViajesChofer', \viajeChoferApi::class . ':traerViajesChof');
+  $this->put('/finViaje',\viajeChoferApi::class . ':finViaje');
   
   
 });

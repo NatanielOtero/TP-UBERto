@@ -1,0 +1,10 @@
+.banner{
+
+
+
+    background-image: url("../../../../assets/images/chofer.jpg");
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-size: cover; 
+    height: 650px;
+}

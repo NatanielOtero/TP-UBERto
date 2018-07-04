@@ -34,6 +34,14 @@ export class AutheService {
     // whether or not the token is expired
     return jwt.isTokenExpired(token);
   }
+  private sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async  pausa(ms) {
+    console.log('Taking a break...');
+    await this.sleep(ms);
+    console.log('Two second later');
+  }
 
   
 }

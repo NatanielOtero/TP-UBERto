@@ -85,6 +85,7 @@ export class MenuBarComponent implements OnInit {
         this.items = [
           {
               label: 'Viajes asignados',
+              routerLink: '/ChofPrin/ChofViaje'   
               
              
           }                  

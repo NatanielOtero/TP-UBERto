@@ -7,36 +7,28 @@
       <div class="ui-g-12 banner stroke" >
           <div style="margin-top: 5%">
 
-        
-                
-
-            <div [hidden]="op">
-                    <h2 style="color: azure;background-color: black">Viajes pendientes</h2>   
-                    <p-table [value]="viajes" [responsive]="true" >
+                    <h2 style="color: azure;background-color: black">Viajes</h2>   
+                    <p-table [value]="viajesP" [responsive]="true" >
                         <ng-template pTemplate="header">
                             <tr >
-                                <th>Fecha</th>
-                                <th>Comodidades</th>
+                                <th>Fecha</th>                                
                                 <th>Estado</th> 
                                 <th>Accion</th>                             
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-viaje>
                             <tr>
-                                <td>{{viaje.fecha | date:'medium'}}</td>
-                                <td>{{viaje.comodidad | comod}}</td>
+                                <td>{{viaje.fecha | date:'medium'}}</td>                               
                                 <td>{{viaje.estado | est}}</td>  
                                 <td>
                                       
-                                  <button pButton type="button" label="Asignar" (click)="asignarViaje(viaje.cod_Viaje)" class="ui-button-info"></button> 
+                                  <button pButton  type="button" label="Completar" (click)="Completar(viaje.cod_Viaje)" class="ui-button-danger"></button> 
+                                 
                                 </td>                      
                             </tr>
                         </ng-template>
                     </p-table>
-            </div>
-           
-         
-
+                     
          
         </div>
       </div> 
@@ -60,21 +52,9 @@
 <p-dialog [(visible)]="info" [width]="300">
     {{msg}}
 </p-dialog>
-<p-dialog header="Asignar viaje" [(visible)]="asig" [width]="300">
-    <p-table [value]="remiserosAcordes" [responsive]="true" >
-        <ng-template pTemplate="header">
-            <tr >
-                <th>Chofer</th>
-                <th>Accion</th>                          
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-chof>
-            <tr>
-                <td>{{chof.user }}</td>                
-                <td>
-                 <button pButton type="button" label="Confirmar" (click)="asignarChofer(chof.user)" class="ui-button-info"></button> 
-                </td>                      
-            </tr>
-        </ng-template>
-    </p-table>
-</p-dialog>
+<p-confirmDialog header="Completar el viaje" icon="pi pi-exclamation-triangle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

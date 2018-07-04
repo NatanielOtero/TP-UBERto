@@ -35,6 +35,9 @@ import { ConfirmationService } from 'primeng/api';
 import { ModificarViajeComponent } from './componentes/cli/modificar-viaje/modificar-viaje.component';
 import { ListadoVehiculosComponent } from './componentes/administrador/listado-vehiculos/listado-vehiculos.component';
 import { HistorialViajesComponent } from './componentes/administrador/historial-viajes/historial-viajes.component';
+import { MenuChoferComponent } from './componentes/chofer/menu-chofer/menu-chofer.component';
+import { ChoferesComponent } from './componentes/chofer/choferes/choferes.component';
+import { ViajesChoferComponent } from './componentes/chofer/viajes-chofer/viajes-chofer.component';
 
   
 @NgModule({
@@ -57,7 +60,10 @@ import { HistorialViajesComponent } from './componentes/administrador/historial-
     EstPipe,
     ModificarViajeComponent,
     ListadoVehiculosComponent,
-    HistorialViajesComponent
+    HistorialViajesComponent,
+    MenuChoferComponent,
+    ChoferesComponent,
+    ViajesChoferComponent
   ],
   imports: [
     CommonModule, 
