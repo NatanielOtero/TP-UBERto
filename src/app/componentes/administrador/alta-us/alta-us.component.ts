@@ -95,7 +95,7 @@ export class AltaUsComponent implements OnInit {
             let chofer = new Chofer();
             chofer.user = this.usuario.user;
             chofer.comodidad = this.comodidad;
-           this.servicio.AltaChofer(chofer).then(
+            this.servicio.AltaChofer(chofer).then(
              
              data => {console.log(data)}
               

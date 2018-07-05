@@ -75,6 +75,11 @@ export class MenuBarComponent implements OnInit {
              
           },
           {
+            label: 'Listado de usuarios', 
+            routerLink: '/AdminPrin/Usuarios' 
+           
+          },
+          {
             label: 'Informes',  
                
            

@@ -17,7 +17,7 @@
                             <tr >
                                 <th>Fecha</th>
                                 <th>Comodidades</th>
-                                <th>Estado</th> 
+                                <th>Estado</th>                               
                                 <th>Accion</th>                             
                             </tr>
                         </ng-template>
@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{viaje.fecha | date:'medium'}}</td>
                                 <td>{{viaje.comodidad | comod}}</td>
-                                <td>{{viaje.estado | est}}</td>  
+                                <td>{{viaje.estado | est}}</td>                                 
                                 <td>
                                       
                                   <button pButton type="button" label="Asignar" (click)="asignarViaje(viaje.cod_Viaje)" class="ui-button-info"></button> 
@@ -60,17 +60,19 @@
 <p-dialog [(visible)]="info" [width]="300">
     {{msg}}
 </p-dialog>
-<p-dialog header="Asignar viaje" [(visible)]="asig" [width]="300">
+<p-dialog header="Asignar viaje" [(visible)]="asig" [width]="500">
     <p-table [value]="remiserosAcordes" [responsive]="true" >
         <ng-template pTemplate="header">
             <tr >
                 <th>Chofer</th>
+                <th>Comodidad</th>
                 <th>Accion</th>                          
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-chof>
             <tr>
-                <td>{{chof.user }}</td>                
+                <td>{{chof.user }}</td>
+                <td>{{chof.comodidad | comod }}</td>                        
                 <td>
                  <button pButton type="button" label="Confirmar" (click)="asignarChofer(chof.user)" class="ui-button-info"></button> 
                 </td>                      
@@ -78,3 +80,10 @@
         </ng-template>
     </p-table>
 </p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

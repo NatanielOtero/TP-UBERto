@@ -7,20 +7,26 @@
     <form  [formGroup]="vehiculoForm" (ngSubmit)="Registrar()">
         <div class="ui-inputgroup" >
  
-            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+            <span class="ui-inputgroup-addon"></span>
             <input type="text" style="width: 100%" pattern=".{6,6}"  placeholder="Patente" name="patente" [formControl]="patente" required>
                </div>
 
         <div class="ui-inputgroup" >
-            <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+            <span class="ui-inputgroup-addon"></span>
             <input type="text" style="width: 100%"  placeholder="Marca" name="marca" [formControl]="marca" required />   
         </div> 
         
         <div class="ui-inputgroup" >
-          <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+          <span class="ui-inputgroup-addon"></span>
           <input type="text" style="width: 100%"  placeholder="Modelo" name="modelo" [formControl]="modelo" required />   
       </div>   
-    
+
+      
+        <p-dropdown [options]="choferes" [formControl]="chofer"></p-dropdown>
+      <br>
+
+      
+       
       
        
            

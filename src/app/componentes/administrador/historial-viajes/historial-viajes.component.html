@@ -18,6 +18,7 @@
                                 <th>Fecha</th>
                                 <th>Comodidades</th>
                                 <th>Estado</th> 
+                                <th>Hora fin</th> 
                                                         
                             </tr>
                         </ng-template>
@@ -26,6 +27,7 @@
                                 <td>{{viaje.fecha | date:'medium'}}</td>
                                 <td>{{viaje.comodidad | comod}}</td>
                                 <td>{{viaje.estado | est}}</td>  
+                                <td>{{viaje.fechaFin | date:'medium'}}</td>  
                                                    
                             </tr>
                         </ng-template>

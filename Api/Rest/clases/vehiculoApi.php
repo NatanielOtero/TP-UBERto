@@ -13,12 +13,14 @@ class vehiculoApi extends vehiculo{
          //var_dump($ArrayDeParametros);
          $patente= $ArrayDeParametros['patente'];
          $marca= $ArrayDeParametros['marca'];
-         $modelo= $ArrayDeParametros['modelo'];    
+         $modelo= $ArrayDeParametros['modelo'];  
+         $chofer= $ArrayDeParametros['chofer'];      
          
          $vehiculo = new vehiculo();
          $vehiculo->patente=$patente;
          $vehiculo->marca=$marca;
-         $vehiculo->modelo=$modelo;        
+         $vehiculo->modelo=$modelo;    
+         $vehiculo->chofer=$chofer;      
          $objDelaRespuesta->respuesta= $respuesta = $vehiculo->altaVehi();     
                       
         

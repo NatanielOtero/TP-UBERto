@@ -7,16 +7,16 @@
   class user
   {
     public $user; 
-      
+    public $estado;  
     public $nivel;
     
-
+    
     public static function LogearUs($user,$pass)    
     {
      
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
       $consulta =$objetoAccesoDato->RetornarConsulta("
-        SELECT user , nivel
+        SELECT user , nivel, estado
         FROM usuarios      
         WHERE user=:us AND pass =:p" );   
       $consulta->bindValue(':us',$user, PDO::PARAM_STR);    
@@ -28,7 +28,7 @@
     public function traerTodos()
     {
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-      $consulta =$objetoAccesoDato->RetornarConsulta("SELECT user, nivel FROM `usuarios`");
+      $consulta =$objetoAccesoDato->RetornarConsulta("SELECT user, nivel,estado FROM `usuarios`");
       $consulta->execute();
       //var_dump($consulta->fetchAll(PDO::FETCH_CLASS, "user"));
       return $consulta->fetchAll(PDO::FETCH_CLASS, "user");
@@ -42,6 +42,17 @@
           return $consulta->execute();
          
     }    
+    public function modUs()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+        UPDATE `usuarios`
+        SET `estado`= :est
+        WHERE `user` = :us ");     
+        $consulta->bindValue(':est',$this->estado, PDO::PARAM_INT);       
+        $consulta->bindValue(':us', $this->user, PDO::PARAM_STR);
+        return $consulta->execute();
+    }
     /*
     public static function traerUs($id)
     {

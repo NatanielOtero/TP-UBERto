@@ -23,6 +23,11 @@ export class ViajesService {
     return  this.http.traer(this.url + "/Usuario/ViajesUsuario");
       
   }
+  Viajes()
+  {
+    return  this.http.traer(this.url + "/Publico/ViajesUsuario");
+      
+  }
   ViajesChofer()
   {
     return  this.http.traer(this.url + "/Chofer/ViajesChofer");
@@ -46,8 +51,16 @@ export class ViajesService {
   {
     return this.http.put(this.url + "/Administrador/EstadoViaje",viaje);
   }
+  cambiarEstadoChofer(viaje)
+  {
+    return this.http.put(this.url + "/Chofer/EstadoViaje",viaje);
+  }
   completarViaje(viaje)
   {
     return this.http.put(this.url + "/Chofer/finViaje",viaje);
+  }
+  finHora(viaje)
+  {
+    return this.http.put(this.url + "/Chofer/fechaFin",viaje);
   }
 }

@@ -1,6 +1,6 @@
 
 export class Viaje {
-    
+    cod_Viaje;
     user;
     horario;
     fecha;
@@ -11,6 +11,7 @@ export class Viaje {
     pago;
     comodidad;
     estado;
+    fin;
    
   
   

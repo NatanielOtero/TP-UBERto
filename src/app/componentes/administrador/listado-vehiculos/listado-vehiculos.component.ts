@@ -50,16 +50,29 @@ export class ListadoVehiculosComponent implements OnInit {
     this.users.traerChoferes().then(
      data=>{
       data.forEach(element => {
-        if(viaje.comodidad == element.comodidad)
+        if(viaje.comodidad == element.comodidad && element.estado == 1)
         {
           this.remiserosAcordes.push(element);
         }
       });
       if(this.remiserosAcordes.length == 0)
       {
-        
-        this.info = true;
-        this.msg = "No hay remiseros que cumplan con los requisitos";
+        this.confirmationService.confirm({
+          message: "No hay remiseros que cumplan con los requisitos, desea asignar el viaje a otro remisero? ",
+          accept: () => {
+            data.forEach(element => {
+              if(element.estado == 1)
+              {
+                this.remiserosAcordes.push(element);
+              }
+            });
+            this.viajeAsig.cod_Viaje = cod_viaje;
+            this.viajeAsig.estado = 2;
+            this.asig = true;  
+          }
+        });
+       
+       
       }else
       {
         this.viajeAsig.cod_Viaje = cod_viaje;

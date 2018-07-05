@@ -38,6 +38,8 @@ import { HistorialViajesComponent } from './componentes/administrador/historial-
 import { MenuChoferComponent } from './componentes/chofer/menu-chofer/menu-chofer.component';
 import { ChoferesComponent } from './componentes/chofer/choferes/choferes.component';
 import { ViajesChoferComponent } from './componentes/chofer/viajes-chofer/viajes-chofer.component';
+import { UsuariosComponent } from './componentes/administrador/usuarios/usuarios.component';
+import { UsEstPipe } from './pipes/us-est.pipe';
 
   
 @NgModule({
@@ -63,7 +65,9 @@ import { ViajesChoferComponent } from './componentes/chofer/viajes-chofer/viajes
     HistorialViajesComponent,
     MenuChoferComponent,
     ChoferesComponent,
-    ViajesChoferComponent
+    ViajesChoferComponent,
+    UsuariosComponent,
+    UsEstPipe
   ],
   imports: [
     CommonModule, 

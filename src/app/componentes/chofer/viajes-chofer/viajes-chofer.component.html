@@ -11,18 +11,21 @@
                     <p-table [value]="viajesP" [responsive]="true" >
                         <ng-template pTemplate="header">
                             <tr >
-                                <th>Fecha</th>                                
+                                <th>Fecha</th> 
+                                <th>Viaje</th>                               
                                 <th>Estado</th> 
                                 <th>Accion</th>                             
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-viaje>
                             <tr>
-                                <td>{{viaje.fecha | date:'medium'}}</td>                               
+                                <td>{{viaje.fecha | date:'medium'}}</td> 
+                                <td>{{viaje.cod_Viaje}}</td>                                    
                                 <td>{{viaje.estado | est}}</td>  
                                 <td>
-                                      
-                                  <button pButton  type="button" label="Completar" (click)="Completar(viaje.cod_Viaje)" class="ui-button-danger"></button> 
+                                  <button pButton type="button" label="Ver Ruta" (click)="VerViaje(viaje.cod_Viaje)" class="ui-button-primary"></button>      
+                                  <button pButton [disabled]="viaje.estado != 2" type="button" label="Aceptar" (click)="Aceptar(viaje.cod_Viaje)" class="ui-button-success"></button>                                     
+                                  <button pButton [disabled]="viaje.estado != 3" type="button" label="Completar" (click)="Completar(viaje.cod_Viaje)" class="ui-button-info"></button> 
                                  
                                 </td>                      
                             </tr>
@@ -58,3 +61,17 @@
         <button type="button" pButton icon="pi pi-check" label="Si" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
+
+<p-dialog  [(visible)]="verDir" [width]="400">
+        <agm-map [latitude]="latitudeUno" [zoom]="14" [longitude]="longitudeUno" (mapClick)="onChooseLocation($event)">
+            <agm-marker 
+            [latitude]="latitudeUno" 
+            [longitude]="longitudeUno">
+            </agm-marker>
+            <agm-marker 
+            [latitude]="latitudeDos" 
+            [longitude]="longitudeDos">
+            </agm-marker>
+            <agm-direction *ngIf="dir" [origin]="dir.origin" [panel]="directionpanel" [waypoints]="waypoints"  [destination]="dir.destination"></agm-direction>
+          </agm-map>
+    </p-dialog>

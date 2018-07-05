@@ -22,6 +22,7 @@ import { AuthChofService } from '../../servicios/auth-chof.service';
 import { MenuChoferComponent } from '../../componentes/chofer/menu-chofer/menu-chofer.component';
 import { ChoferesComponent } from '../../componentes/chofer/choferes/choferes.component';
 import { ViajesChoferComponent } from '../../componentes/chofer/viajes-chofer/viajes-chofer.component';
+import { UsuariosComponent } from '../../componentes/administrador/usuarios/usuarios.component';
 
 
 
@@ -35,7 +36,8 @@ const MiRuteo = [
     children:[
      {path:'',component: AdministracionComponent , canActivate: [AuthAdminService]},
      {path:'ListViaje',component:ListadoVehiculosComponent,canActivate:[AuthAdminService]},
-     {path:'HistViaje',component:HistorialViajesComponent,canActivate:[AuthAdminService]}
+     {path:'HistViaje',component:HistorialViajesComponent,canActivate:[AuthAdminService]},
+     {path:'Usuarios',component:UsuariosComponent,canActivate:[AuthAdminService]}
   
   ]},
   {path: 'CliPrin',component: MenuClientComponent,canActivate: [AuthCliService],

@@ -3,6 +3,7 @@ import { ViajesService } from '../../../servicios/viajes.service';
 import { AutheService } from '../../../servicios/authe.service';
 import { viajeCHofer } from '../../../clases/viaje-chofer';
 import { ConfirmationService } from 'primeng/api';
+import { Viaje } from '../../../clases/viaje';
 
 @Component({
   selector: 'app-viajes-chofer',
@@ -13,12 +14,51 @@ export class ViajesChoferComponent implements OnInit {
 
   user : string;
   viajesP:any[];
+  viajes = new Array<any>();
   viajeAsig = new viajeCHofer();
   cols: any[];
   info : boolean = false;
-  msg : string;  
+  msg : string;
+  verDir = false;  
+  latitudeUno : number = 0;
+  longitudeUno : number = 0; 
+  latitudeDos : number = 0;
+  longitudeDos : number = 0; 
+  dir = undefined;
   
   constructor(public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService) { }
+
+  VerViaje(viaje)  
+  {
+    this.service.Viajes().then(data=>{
+      data.forEach(element => {
+        if(viaje == element.cod_Viaje)
+        {
+          this.latitudeUno = element.latOr;
+          this.longitudeUno = element.lonOr;
+          this.latitudeDos = element.latDes;
+          this.longitudeDos = element.lonDes;
+        }
+       
+      });    
+      if(this.latitudeUno != 0 || this.latitudeDos != 0)
+      {
+        this.dir = {
+          origin: { lat: this.latitudeUno, lng: this.longitudeUno },
+          destination: { lat: this.latitudeDos, lng: this.longitudeDos }
+        }
+        this.verDir = true;
+        console.log(this.dir.origin + "ver ruta");
+       
+      }
+      else
+      {
+        this.info = true;
+        this.msg = "No se puede mostrar el viaje";
+      }
+    })
+    
+  }
 
   Completar(viaje)
   {
@@ -26,15 +66,28 @@ export class ViajesChoferComponent implements OnInit {
       message: 'Desea dar como terminado el viaje?',
       accept: () => {
         this.viajeAsig.cod_Viaje = viaje;
-        this.viajeAsig.estado = 3;
+        this.viajeAsig.estado = 4;        
         this.service.completarViaje(this.viajeAsig).then(
           
             data =>{
               if(data){
-                this.info = true;
-                this.msg = "Viaje terminado";
-                this.authe.pausa(5000);
-                window.location.reload();
+               
+                let viajeFin = new Viaje();
+                let date = new Date();
+                console.log(date + "algo");
+                viajeFin.cod_Viaje = viaje;
+                viajeFin.fin = date;
+                this.service.finHora(viajeFin).then(data=>{
+                 if(data)
+                 {
+                  this.info = true;
+                  this.msg = "Viaje terminado";
+                  this.authe.pausa(5000);
+                  window.location.reload();
+                 }
+                 
+                });
+             
               }
               else
               {
@@ -49,16 +102,48 @@ export class ViajesChoferComponent implements OnInit {
       }
   });
 
+ 
+
    
   }
+      Aceptar(viaje){
+        this.confirmationService.confirm({
+          message: 'Desea aceptar el viaje?',
+          accept: () => {
+            this.viajeAsig.cod_Viaje = viaje;
+            this.viajeAsig.estado = 3;
+            this.service.completarViaje(this.viajeAsig).then(
+              
+                data =>{
+                  if(data){
+                    this.info = true;
+                    this.msg = "Viaje aceptado";
+                    this.authe.pausa(5000);
+                    window.location.reload();
+                  }
+                  else
+                  {
+                    this.info = true;
+                    this.msg = "Error al aceptar el viaje";
+        
+                  }
+                }
+              
+            );
+            console.log(viaje);
+          }
+      });
+    }
+    
   ngOnInit() {
+    
     this.viajesP = new Array<any>();
    
     this.user = this.authe.getUser();
     let respuesta = this.service.ViajesChofer().then(
       data => {
         data.forEach(element => {
-          if(element.user == this.user && element.estado == 2)
+          if(element.user == this.user && element.estado != 4 && element.estado != 1)
           {
             this.viajesP.push(element);
           }         

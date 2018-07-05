@@ -13,9 +13,13 @@ export class EstPipe implements PipeTransform {
    }
    if(value==2)
    {
-    retorno = "En Curso";
+    retorno = "Asignado";
    }
    if(value==3)
+   {
+    retorno = "En curso";
+   }
+   if(value==4)
    {
     retorno = "Finalizado";
    }

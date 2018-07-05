@@ -1,6 +1,7 @@
 <?php
 
   require_once "AccesoDatos.php";
+  require_once "usuario.php";
 
   class viajes{
 
@@ -15,7 +16,28 @@
     public $user;
    
     
-
+    public function VerificarUser()    
+    {
+     
+      $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+      $consulta =$objetoAccesoDato->RetornarConsulta("
+        SELECT user , nivel, estado
+        FROM usuarios      
+        WHERE user=:us" );   
+      $consulta->bindValue(':us',$this->user, PDO::PARAM_STR);  
+        
+      $consulta->execute();
+      $usuario= $consulta->fetchObject('user');
+      if($usuario->estado == 2)
+      {
+          return false;
+      }
+      else
+      {
+        return true;
+      }
+        
+    }
     public function pedirViaje()
     {
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -30,7 +52,7 @@
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
           $consulta =$objetoAccesoDato->RetornarConsulta("
-          SELECT * FROM `viajes`");
+          SELECT * FROM `viajes` ORDER BY `estado`");
           $consulta->execute();
           return $consulta->fetchAll(PDO::FETCH_CLASS, "viajes");
           /*$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

@@ -24,6 +24,18 @@
       //var_dump($consulta->fetchAll(PDO::FETCH_CLASS, "user"));
       return $consulta->fetchAll(PDO::FETCH_CLASS, "chofer");
     }
+    public function modCho()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+        UPDATE `choferes`
+         SET `estado`= :est
+         WHERE `user` = :us ");  
+        $consulta->bindValue(':us', $this->user, PDO::PARAM_STR);   
+        $consulta->bindValue(':est',$this->estado, PDO::PARAM_INT);      
+       
+        return $consulta->execute();
+    }
     
 
   }

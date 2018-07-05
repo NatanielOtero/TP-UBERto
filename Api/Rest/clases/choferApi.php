@@ -29,6 +29,18 @@ class choferApi extends chofer{
      	$newresponse = $response->withJson($usuarios, 200);
     	return $newresponse;
     }
+    public function ModificarChof($request, $response, $args) 
+    {
+     	//$response->getBody()->write("<h1>Modificar  uno</h1>");
+     	$ArrayDeParametros = $request->getParsedBody();
+	    //var_dump($ArrayDeParametros);
+	    $user = new chofer();	   
+	    $user->user=$ArrayDeParametros['user'];
+        $user->estado=$ArrayDeParametros['estado'];       
+        
+        return	$resultado =$user->modCho();
+       
+    }
    
 }
 

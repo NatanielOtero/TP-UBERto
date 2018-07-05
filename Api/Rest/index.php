@@ -38,7 +38,7 @@ $app->group('/Publico', function () {
 
   $this->post('/Logear', \userApi::class . ':Logear');
   $this->post('/Registro', \userApi::class . ':Registro'); 
-
+  $this->get('/ViajesUsuario', \viajesApi::class . ':traerViajesUs');
 
 });
 
@@ -47,6 +47,8 @@ $app->group('/Administrador', function () {
   //MANEJO DE USUARIOS
   $this->get('/traer',\userApi::class . ':TraerAll');
   $this->post('/Alta', \userApi::class . ':Registro');
+  $this->put('/ModUs',\userApi::class . ':ModificarUno');
+  $this->put('/ModChof',\choferApi::class . ':ModificarChof');
   //MANEJO VEHICULOS
   $this->post('/AltaVehi', \vehiculoApi::class . ':AltaVehiculo');
   //MANEJO CHOFERES
@@ -63,7 +65,8 @@ $app->group('/Chofer', function () {
   
   $this->get('/ViajesChofer', \viajeChoferApi::class . ':traerViajesChof');
   $this->put('/finViaje',\viajeChoferApi::class . ':finViaje');
-  
+  $this->put('/fechaFin',\viajeChoferApi::class . ':setFechaFin');
+  $this->put('/EstadoViaje',\viajeChoferApi::class . ':cambiarEstadoViaje');
   
 });
 

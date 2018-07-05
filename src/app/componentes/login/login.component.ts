@@ -5,6 +5,7 @@ import { Usuario } from '../../clases/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   usuario: Usuario;  
   isError = false;
   error : string = ""; 
+  
 
   constructor(public usuarioServ : UsuariosService, public router : Router, public routes : ActivatedRoute ) {
     this.usuario = new Usuario();
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
 
    iniciar() {
     this.usuario.pass = this.pass;
-    this.usuario.user = this.user;
+    this.usuario.user = this.user;    
     console.log(this.usuario);
     let token = this.usuarioServ.InciarSesion(this.usuario);
     
@@ -52,9 +54,19 @@ export class LoginComponent implements OnInit {
           this.error = "El usuario y/o la contraseña son erroneos";
           console.log("nada");
         }else{
-          console.log("ok");
-          localStorage.setItem("token",data);
-          this.router.navigate(['/Principal']);
+          if(data.error == "baneado")
+          {
+            this.isError = true;
+            this.error = "El usuario se encuentra baneado";
+            console.log("nada");
+          }
+          else
+          {
+            console.log("ok");
+            localStorage.setItem("token",data);
+            this.router.navigate(['/Principal']);
+          }        
+         
         }
        // 
        

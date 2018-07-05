@@ -3,4 +3,5 @@ export class viajeCHofer{
     chofer : string;
     estado : number;
     fecha : any;
+ 
 }

@@ -2,14 +2,9 @@
 
 
 
-    background-image: url("../../../../assets/images/chofer.jpg");
+    background-image: url("../../../../assets/images/bg.png");
     background-repeat: no-repeat; 
     background-position: center; 
     background-size: cover; 
-    height: 650px;
-}
-
-agm-map {
     height: 400px;
-  
-  }
+}

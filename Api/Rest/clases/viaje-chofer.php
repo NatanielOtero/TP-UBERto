@@ -8,6 +8,8 @@
     public $user;
     public $estado;
     public $fecha;
+    public $fechaFin;
+    public $comodidad;
 
     public function asigViaje()
     {
@@ -41,6 +43,18 @@
         $consulta->bindValue(':est',$this->estado);
         return $consulta->execute();
     }
+    public function fechaFin()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+        UPDATE `viajes` SET         
+          `fechaFin`=:est 
+        WHERE cod_Viaje =:id");  
+        $consulta->bindValue(':id',$this->cod_Viaje);   
+        $consulta->bindValue(':est',$this->fechaFin);
+        return $consulta->execute();
+    }
+
     
     public function viajesChof()
     {

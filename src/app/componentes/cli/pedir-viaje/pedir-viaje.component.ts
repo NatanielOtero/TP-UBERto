@@ -7,6 +7,7 @@ import { Viaje } from '../../../clases/viaje';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ViajesService } from '../../../servicios/viajes.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AutheService } from '../../../servicios/authe.service';
 
 declare var google: any;
 
@@ -44,7 +45,7 @@ export class PedirViajeComponent implements OnInit {
 
   helper = new JwtHelperService();
 
-  constructor(private builder : FormBuilder,public serv : ViajesService) {
+  constructor(private builder : FormBuilder,public serv : ViajesService,public router : Router,public aux : AutheService) {
     
     let token = localStorage.getItem('token');
     let datos = this.helper.decodeToken(token);
@@ -105,7 +106,7 @@ export class PedirViajeComponent implements OnInit {
      let respuesta;
     respuesta = this.serv.PedirViaje(this.viaje)
     .then( data => {
-      if(data)
+      if(data.respuesta)
       {    
         console.log(respuesta);     
                   // 
@@ -117,7 +118,15 @@ export class PedirViajeComponent implements OnInit {
       }
       else
       {
-        console.log(respuesta);
+        console.log(data.mensaje);
+        if(data.mensaje == "Usuario invalido")
+        {
+          this.msg=data.mensaje;
+          this.info = true;
+          localStorage.removeItem("token");
+          this.aux.pausa(5000);          
+          this.router.navigate(['/']);
+        }
         this.msg = "Error al pedir el viaje";
         this.info = true;
       } 

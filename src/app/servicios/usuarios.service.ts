@@ -36,7 +36,14 @@ export class UsuariosService {
     return this.http.traer(this.url +  "/Administrador/traerChoferes");
    
   }
-  
+  ModUs(us)
+  {
+    return this.http.put(this.url +  "/Administrador/ModUs",us);
+  }
+  ModChof(us)
+  {
+    return this.http.put(this.url +  "/Administrador/ModChof",us);
+  }
      
   ObtenerUsuarios()
   {

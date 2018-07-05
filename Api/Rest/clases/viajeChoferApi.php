@@ -63,6 +63,27 @@ class viajeChoferApi extends viajeChofer{
         
         return $response->withJson($objDelaRespuesta, 200);
     }
+    public function setFechaFin($request, $response, $args) 
+    {
+     	//$response->getBody()->write("<h1>Modificar  uno</h1>");
+         $ArrayDeParametros = $request->getParsedBody();
+         $objDelaRespuesta= new stdclass();
+	    //var_dump($ArrayDeParametros);
+	    $fechaFin= $ArrayDeParametros['fin'];        
+        $id= $ArrayDeParametros['cod_Viaje'];
+
+         
+         $viaje = new viajeChofer();
+         $viaje->cod_Viaje = $id;        
+         $viaje->fechaFin= $fechaFin;
+      
+             
+    
+        
+        return $viaje->fechaFin();
+    }
+
+ 
     public function traerViajesChof($request, $response, $args) 
     {
        

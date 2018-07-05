@@ -29,8 +29,18 @@ class viajesApi extends viajes{
          $viaje->lonDes=$lonDes;
          $viaje->user=$user;
           
-                
-         $objDelaRespuesta->respuesta= $respuesta = $viaje->pedirViaje();     
+         $valido = $viaje->VerificarUser();
+         if($valido)
+         {
+            $objDelaRespuesta->respuesta= $respuesta = $viaje->pedirViaje();   
+         }
+         else
+         {
+            $objDelaRespuesta->respuesta= $respuesta = $valido;
+            $objDelaRespuesta->mensaje= $mensaje = "Usuario invalido";
+         }
+               
+              
                       
         
          return $response->withJson($objDelaRespuesta, 200);

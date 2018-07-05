@@ -26,9 +26,18 @@ class userApi extends user
         else
         {     // CREO EL TOKEN
             //$NuevaRespuesta = $response->withJson($usuario, 200);   
+            if($usuario->estado == 1)
+            {
+                $token= AutentificadorJWT::CrearToken($usuario);
+                $NuevaRespuesta = $response->withJson($token,200);
+            }else
+            {
+                $objDelaRespuesta= new stdclass();
+                $objDelaRespuesta->error="baneado";
+                $NuevaRespuesta = $response->withJson($objDelaRespuesta, 200);
 
-            $token= AutentificadorJWT::CrearToken($usuario);
-            $NuevaRespuesta = $response->withJson($token,200);
+            }
+           
         }
 
         return $NuevaRespuesta;
@@ -58,6 +67,18 @@ class userApi extends user
         $usuarios= user::traerTodos();
      	$newresponse = $response->withJson($usuarios, 200);
     	return $newresponse;
+    }
+    public function ModificarUno($request, $response, $args) 
+    {
+     	//$response->getBody()->write("<h1>Modificar  uno</h1>");
+     	$ArrayDeParametros = $request->getParsedBody();
+	    //var_dump($ArrayDeParametros);
+	    $user = new user();	   
+	    $user->user=$ArrayDeParametros['user'];
+        $user->estado=$ArrayDeParametros['estado'];       
+        
+        return	$resultado =$user->modUs();
+       
     }
      /*
     public function TraerUno($request, $response, $args) 
