@@ -80,13 +80,15 @@ export class ViajesChoferComponent implements OnInit {
                 this.service.finHora(viajeFin).then(data=>{
                  if(data)
                  {
-                  this.info = true;
-                  this.msg = "Viaje terminado";
-                  this.authe.pausa(5000);
-                  window.location.reload();
+                 
                  }
+
                  
                 });
+                this.info = true;
+                this.msg = "Viaje terminado";
+                this.authe.pausa(5000);
+                window.location.reload();
              
               }
               else
@@ -143,7 +145,7 @@ export class ViajesChoferComponent implements OnInit {
     let respuesta = this.service.ViajesChofer().then(
       data => {
         data.forEach(element => {
-          if(element.user == this.user && element.estado != 4 && element.estado != 1)
+          if(element.user == this.user && element.estado != 4 && element.estado != 1 && element.estado != 5)
           {
             this.viajesP.push(element);
           }         

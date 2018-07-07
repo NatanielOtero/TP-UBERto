@@ -1,0 +1,36 @@
+<div class="banner" style="display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%">
+<p-card  style="text-align: center" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+    
+  <h3 style="color: azure;background-color: black">Califique al chofer</h3>
+  <p-rating [(ngModel)]="val1"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Califique los medios de pago</h3>
+  <p-rating [(ngModel)]="val2"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Califique el estado del vehiculo</h3>
+  <p-rating [(ngModel)]="val3"  [cancel]="false" ></p-rating>
+  <h3 style="color: azure;background-color: black">Califique la ruta</h3> 
+  <p-rating [(ngModel)]="val4"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Califique el tiempo tardado</h3>
+  <p-rating [(ngModel)]="val5"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Califique el servicio de la empresa</h3>
+  <p-rating [(ngModel)]="val6"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Volveria a viajar con nosotros?</h3>
+  <p-rating [(ngModel)]="val7"  [cancel]="false" ></p-rating> 
+  <h3 style="color: azure;background-color: black">Nos recomendaria?</h3>
+  <p-rating [(ngModel)]="val8"  [cancel]="false" ></p-rating>    
+      
+    
+      
+    <p-footer>
+      <button  pButton type="button" label="Enviar Respuestas" (click)="Enviar()" style="margin-right: .25em"></button>
+        
+      
+    </p-footer>
+</p-card>
+</div>
+
+<p-dialog [(visible)]="info" [width]="300">
+  {{msg}}
+</p-dialog>

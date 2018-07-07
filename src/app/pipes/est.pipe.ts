@@ -23,6 +23,10 @@ export class EstPipe implements PipeTransform {
    {
     retorno = "Finalizado";
    }
+   if(value==5)
+   {
+    retorno = "Cancelado";
+   }
 
    return retorno;
   }

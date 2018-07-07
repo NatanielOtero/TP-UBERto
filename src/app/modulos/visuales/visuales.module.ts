@@ -14,6 +14,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {RatingModule} from 'primeng/rating';
+import {ChartModule} from 'primeng/chart';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +33,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     DropdownModule,
     CalendarModule,
     TableModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ProgressSpinnerModule,
+    RatingModule,
+    ChartModule
     
   ],
   exports:[
@@ -45,7 +52,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     DropdownModule,
     CalendarModule,
     TableModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ProgressSpinnerModule,
+    RatingModule,
+    ChartModule
   ],  
   declarations: []
 })

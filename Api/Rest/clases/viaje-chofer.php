@@ -10,13 +10,14 @@
     public $fecha;
     public $fechaFin;
     public $comodidad;
+    public $cobro;
 
     public function asigViaje()
     {
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
           $consulta =$objetoAccesoDato->RetornarConsulta("
-          INSERT INTO `chof_viaje`(cod_Viaje, `user`,fecha)
-          VALUES($this->cod_Viaje,'$this->user','$this->fecha')");
+          INSERT INTO `chof_viaje`(`cod_Viaje`, `user`,`fecha`,`cobro`)
+          VALUES($this->cod_Viaje,'$this->user','$this->fecha',$this->cobro)");
           return $consulta->execute();
          
     }

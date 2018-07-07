@@ -6,8 +6,9 @@ import { MiHttpService } from './mi-http.service';
 })
 export class ViajesService {
 
-  url : string = "http://localhost/Api/Rest";
+  //url : string = "http://localhost/Api/Rest";
   //url : string = "http://localhost:8080/Api/Rest";
+  url = "http://natanielotero.esy.es/Api/Rest"
   constructor(public http : MiHttpService ) { }
 
   PedirViaje(viaje)
@@ -33,10 +34,15 @@ export class ViajesService {
     return  this.http.traer(this.url + "/Chofer/ViajesChofer");
       
   }
+  ViajesChoferUs()
+  {
+    return  this.http.traer(this.url + "/Usuario/ViajesChofer");
+      
+  }
   BajaViaje(viaje)
   {
     
-      return this.http.delete(this.url + "/Usuario/BorrarViaje",viaje);    
+      return this.http.put(this.url + "/Usuario/BorrarViaje",viaje);    
   
   }
   ModViaje(viaje)

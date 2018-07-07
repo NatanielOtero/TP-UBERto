@@ -6,8 +6,9 @@ import { MiHttpService } from './mi-http.service';
 })
 export class VehiculosService {
 
-  url : string = "http://localhost/Api/Rest";
+  //url : string = "http://localhost/Api/Rest";
   //url : string = "http://localhost:8080/Api/Rest";
+  url = "http://natanielotero.esy.es/Api/Rest"
   constructor(public http : MiHttpService ) { }
 
   AltaVehiculo(vehiculo)

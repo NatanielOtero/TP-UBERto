@@ -13,7 +13,8 @@ export class AuthAdminService implements CanActivate {
    
   
   canActivate() {
-   
+    console.log(this.user.nivel + "CAN ACTIVATE");
+    
     if(this.user != null)
     { 
       if(this.user.nivel == 1)

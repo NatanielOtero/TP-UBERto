@@ -40,6 +40,9 @@ import { ChoferesComponent } from './componentes/chofer/choferes/choferes.compon
 import { ViajesChoferComponent } from './componentes/chofer/viajes-chofer/viajes-chofer.component';
 import { UsuariosComponent } from './componentes/administrador/usuarios/usuarios.component';
 import { UsEstPipe } from './pipes/us-est.pipe';
+import { KmPipe } from './pipes/km.pipe';
+import { EncuestaComponent } from './componentes/cli/encuesta/encuesta.component';
+import { InformesComponent } from './componentes/administrador/informes/informes.component';
 
   
 @NgModule({
@@ -67,7 +70,10 @@ import { UsEstPipe } from './pipes/us-est.pipe';
     ChoferesComponent,
     ViajesChoferComponent,
     UsuariosComponent,
-    UsEstPipe
+    UsEstPipe,
+    KmPipe,
+    EncuestaComponent,
+    InformesComponent
   ],
   imports: [
     CommonModule, 
@@ -77,16 +83,10 @@ import { UsEstPipe } from './pipes/us-est.pipe';
     VisualesModule,
     HttpModule,
     FormsModule,
-    HttpClientModule,   
+    HttpClientModule,
     JwtModule.forRoot({
-      config:{
-        tokenGetter : () => {
-          let token;
-          token  = localStorage.getItem('token');
-         
-          return token;
-        },
-      whitelistedDomains: ['localhost' , 'localhost:8080' , 'localhost:4200']  
+      config: {
+        tokenGetter: GetToken,
       }
     }),
     AgmCoreModule.forRoot({
@@ -111,3 +111,7 @@ export class AppModule {
 
   
  }
+export function GetToken()
+{
+    return localStorage.getItem('token');
+}

@@ -14,6 +14,9 @@
     public $latDes;
     public $lonDes;
     public $user;
+    public $costo;
+    public $distancia;
+    public $respondio;
    
     
     public function VerificarUser()    
@@ -42,8 +45,8 @@
     {
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
           $consulta =$objetoAccesoDato->RetornarConsulta("
-          INSERT INTO `viajes`(`fecha`, `comodidad`, `pago`, `latOr`, `lonOr`, `latDes`, `lonDes`,`user`)
-          VALUES('$this->fecha',$this->comodidad,'$this->pago',$this->latOr,$this->lonOr,$this->latDes,$this->lonDes,'$this->user')");
+          INSERT INTO `viajes`(`fecha`, `comodidad`, `pago`, `latOr`, `lonOr`, `latDes`, `lonDes`,`user`,`costo`,`distancia`)
+          VALUES('$this->fecha',$this->comodidad,'$this->pago',$this->latOr,$this->lonOr,$this->latDes,$this->lonDes,'$this->user',$this->costo,$this->distancia)");
           return $consulta->execute();
          
     }
@@ -52,7 +55,7 @@
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
           $consulta =$objetoAccesoDato->RetornarConsulta("
-          SELECT * FROM `viajes` ORDER BY `estado`");
+          SELECT * FROM `viajes` ORDER BY `cod_Viaje`");
           $consulta->execute();
           return $consulta->fetchAll(PDO::FETCH_CLASS, "viajes");
           /*$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -66,11 +69,12 @@
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta =$objetoAccesoDato->RetornarConsulta("
-          DELETE FROM `viajes` 
-          WHERE cod_Viaje=:id");
+          UPDATE `viajes`
+          SET `estado`= :est
+          WHERE `cod_Viaje` = :id");
           $consulta->bindValue(':id',$this->cod_Viaje, PDO::PARAM_INT);
-          $consulta->execute();
-          return $consulta->rowCount();
+          $consulta->bindValue(':est',$this->estado, PDO::PARAM_INT);
+          return $consulta->execute();         
     }
     public function modViaje()
     {

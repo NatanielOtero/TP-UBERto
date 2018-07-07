@@ -10,6 +10,7 @@ require_once './clases/vehiculoApi.php';
 require_once './clases/viajesApi.php';
 require_once './clases/choferApi.php';
 require_once './clases/viajeChoferApi.php';
+require_once './clases/encuestasApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -46,6 +47,7 @@ $app->group('/Administrador', function () {
   
   //MANEJO DE USUARIOS
   $this->get('/traer',\userApi::class . ':TraerAll');
+  $this->get('/traerEncuestas',\encuestaApi::class . ':TraerAllEnc');
   $this->post('/Alta', \userApi::class . ':Registro');
   $this->put('/ModUs',\userApi::class . ':ModificarUno');
   $this->put('/ModChof',\choferApi::class . ':ModificarChof');
@@ -68,14 +70,16 @@ $app->group('/Chofer', function () {
   $this->put('/fechaFin',\viajeChoferApi::class . ':setFechaFin');
   $this->put('/EstadoViaje',\viajeChoferApi::class . ':cambiarEstadoViaje');
   
-});
+})->add(\MWparaAutentificar::class . ':VerificarChofer');;
 
 $app->group('/Usuario', function () {
   
   $this->post('/PedirViaje', \viajesApi::class . ':AltaViaje');
+  $this->post('/AltaEncuesta', \encuestaApi::class . ':AltaEncu');
   $this->get('/ViajesUsuario', \viajesApi::class . ':traerViajesUs');
-  $this->delete('/BorrarViaje',\viajesApi::class . ':BorrarViaje');
+  $this->put('/BorrarViaje',\viajesApi::class . ':BorrarViaje');
   $this->put('/ModViaje',\viajesApi::class . ':ModificarViaje');
+  $this->get('/ViajesChofer', \viajeChoferApi::class . ':traerViajesChof');
   
 })->add(\MWparaAutentificar::class . ':VerificarUsuario');
 

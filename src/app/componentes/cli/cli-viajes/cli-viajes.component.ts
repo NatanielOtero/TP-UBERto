@@ -16,12 +16,14 @@ export class CliViajesComponent implements OnInit {
 
   user : string;
   viajesP:any[];
-  viajesR:any[];
+  viajesR:any[]; 
   cols: any[];
   info : boolean = false;
   msg : string;
   modo: SelectItem[];
   op : boolean = false; 
+  encues = false;
+  viajeEncuesta : Viaje;
   
   constructor(public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService, private router : Router, route: ActivatedRoute, ) { 
     this.cols = [
@@ -29,10 +31,10 @@ export class CliViajesComponent implements OnInit {
       { field: 'comodidad', header: 'Comodidad' },
       { field: 'estado', header: 'Estado' }     
   ];
-  this.modo = [
-    {label:'Viajes Pendientes', value:false},
-    {label:'Viajes Realizados', value:true},    
-];
+      this.modo = [
+        {label:'Viajes Pendientes', value:false},
+        {label:'Viajes Realizados', value:true},    
+    ];
   }
   
   Eliminar(cod_Viaje)
@@ -48,16 +50,20 @@ export class CliViajesComponent implements OnInit {
               viaje = element;
             }
           });
+          viaje.estado = 5;
           console.log(viaje);
           if(viaje != null)
           {
-            if(viaje.estado == 1)
+            if(viaje.estado != 3)
             {
               this.service.BajaViaje(viaje);
               this.info = true;
               this.msg = "Viaje cancelado"; 
-              this.crearTabla(); 
-              window.location.reload();
+              this.authe.pausa(5000).then(data=>{
+                console.log(data);
+                window.location.reload();
+              });
+              
 
             }
             else
@@ -90,9 +96,7 @@ export class CliViajesComponent implements OnInit {
           {
            
             this.router.navigate(['/CliPrin/ModViaje',viaje]);
-           /* this.service.BajaViaje(viaje);
-            this.info = true;
-            this.msg = "Viaje cancelado";  */
+           
            
           }
           else
@@ -112,23 +116,39 @@ export class CliViajesComponent implements OnInit {
     this.crearTabla();
 
   }
-
+  Encuesta(viaje)
+  {
+    this.encues = true;
+    this.viajesR.forEach(element => {
+      if(element.cod_Viaje == viaje)
+      {
+        this.viajeEncuesta = element;
+      }
+    });
+    console.log(this.viajeEncuesta + "viaje comp");
+  }
   crearTabla()
   {
     this.viajesP = new Array<any>();
-    this.viajesR = new Array<any>();   
+    this.viajesR = new Array<any>();  
+    
     this.user = this.authe.getUser();
     let respuesta = this.service.ViajesUser().then(
       data => {
         data.forEach(element => {
-          if(element.user == this.user && element.estado != 3)
+          if(element.user == this.user && element.estado != 4 && element.estado != 5)
           {
             this.viajesP.push(element);
           }
-          if(element.user == this.user && element.estado == 3)
+          if(element.user == this.user)
           {
-            this.viajesR.push(element);
+            if( element.estado == 4 || element.estado == 5)
+            {
+              this.viajesR.push(element);
+            }
           }
+          
+          
         });
       }
     );

@@ -22,12 +22,12 @@
               <agm-marker 
               [latitude]="latitudeUno" 
               [longitude]="longitudeUno"
-              *ngIf="seleccioneLocalizacionUno">
+              >
               </agm-marker>
               <agm-marker 
               [latitude]="latitudeDos" 
               [longitude]="longitudeDos"
-              *ngIf="seleccioneLocalizacionDos">
+              >
               </agm-marker>
               <agm-direction *ngIf="dir" [origin]="dir.origin" [panel]="directionpanel" [waypoints]="waypoints"  [destination]="dir.destination"></agm-direction>
             </agm-map>
@@ -71,6 +71,9 @@
     </p-card>
   </div>
 </div>
+<p-dialog [showHeader]="false" [(visible)]="carga" [width]="0">
+  <p-progressSpinner></p-progressSpinner>
+</p-dialog>
 
 <p-dialog [(visible)]="info" [width]="300">
     {{msg}}

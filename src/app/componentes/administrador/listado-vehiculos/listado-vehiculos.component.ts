@@ -47,6 +47,8 @@ export class ListadoVehiculosComponent implements OnInit {
         viaje = element;
       }
     });
+    console.log(viaje);
+   
     this.users.traerChoferes().then(
      data=>{
       data.forEach(element => {
@@ -77,6 +79,8 @@ export class ListadoVehiculosComponent implements OnInit {
       {
         this.viajeAsig.cod_Viaje = cod_viaje;
         this.viajeAsig.estado = 2;
+        this.viajeAsig.fecha = viaje.fecha;
+        this.viajeAsig.pago = viaje.costo;
         this.asig = true;
       }
      } 

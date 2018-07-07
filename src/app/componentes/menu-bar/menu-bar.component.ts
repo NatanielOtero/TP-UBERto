@@ -46,8 +46,8 @@ export class MenuBarComponent implements OnInit {
     if(this.isLogged)
     {
       let nivel = this.usuario.nivel;
-      switch (nivel) {
-        case 1:
+      if(nivel == 1)
+      {
         this.items = [
           {
               label: 'Administracion',
@@ -81,12 +81,14 @@ export class MenuBarComponent implements OnInit {
           },
           {
             label: 'Informes',  
+            routerLink: '/AdminPrin/Informes' 
                
            
           },
          ];
-          break;
-        case 2:
+      }
+      if(nivel == 2)
+      {
         this.items = [
           {
               label: 'Viajes asignados',
@@ -95,8 +97,9 @@ export class MenuBarComponent implements OnInit {
              
           }                  
          ];
-          break;
-        case 3:
+      }
+      if(nivel == 3)
+      {
         this.items = [
           {
               label: 'Solicitar viaje',
@@ -111,11 +114,8 @@ export class MenuBarComponent implements OnInit {
              
           }
          ];
-          break;
-      
-        default:
-          break;
       }
+      
     }
 
   }

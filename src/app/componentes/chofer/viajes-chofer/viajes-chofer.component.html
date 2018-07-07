@@ -13,7 +13,8 @@
                             <tr >
                                 <th>Fecha</th> 
                                 <th>Viaje</th>                               
-                                <th>Estado</th> 
+                                <th>Estado</th>
+                                <th>Costo</th>  
                                 <th>Accion</th>                             
                             </tr>
                         </ng-template>
@@ -22,6 +23,7 @@
                                 <td>{{viaje.fecha | date:'medium'}}</td> 
                                 <td>{{viaje.cod_Viaje}}</td>                                    
                                 <td>{{viaje.estado | est}}</td>  
+                                <td>{{viaje.cobro | currency:'ARS'}}</td>  
                                 <td>
                                   <button pButton type="button" label="Ver Ruta" (click)="VerViaje(viaje.cod_Viaje)" class="ui-button-primary"></button>      
                                   <button pButton [disabled]="viaje.estado != 2" type="button" label="Aceptar" (click)="Aceptar(viaje.cod_Viaje)" class="ui-button-success"></button>                                     
@@ -63,7 +65,7 @@
 </p-confirmDialog>
 
 <p-dialog  [(visible)]="verDir" [width]="400">
-        <agm-map [latitude]="latitudeUno" [zoom]="14" [longitude]="longitudeUno" (mapClick)="onChooseLocation($event)">
+        <agm-map [latitude]="latitudeUno" [zoom]="14" [longitude]="longitudeUno" >
             <agm-marker 
             [latitude]="latitudeUno" 
             [longitude]="longitudeUno">

@@ -12,6 +12,9 @@ export class Viaje {
     comodidad;
     estado;
     fin;
+    costo;
+    distancia;
+    respondio;
    
   
   

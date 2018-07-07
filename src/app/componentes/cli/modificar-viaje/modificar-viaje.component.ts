@@ -7,6 +7,7 @@ import { Viaje, ViajeMod } from '../../../clases/viaje';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ViajesService } from '../../../servicios/viajes.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AutheService } from '../../../servicios/authe.service';
 
 declare var google: any;
 
@@ -42,9 +43,10 @@ export class ModificarViajeComponent implements OnInit {
   viaje : ViajeMod;
   user : string;
 
+  carga = false;
   helper = new JwtHelperService();
   viajeMod : ViajeMod;
-  constructor(private route: ActivatedRoute, private router : Router,private builder : FormBuilder,public serv : ViajesService) {
+  constructor(private route: ActivatedRoute,public aux : AutheService ,private router : Router,private builder : FormBuilder,public serv : ViajesService) {
     
     this.viajeMod = this.route.params["_value"];
     
@@ -89,55 +91,88 @@ export class ModificarViajeComponent implements OnInit {
    pago : this.pago,
    comodidad : this.comodidad
  })
-
  Viajar()
- {
-   this.viaje.comodidad = this.viajeForm.get('comodidad').value;
-   this.viaje.fecha = this.viajeForm.get('fecha').value;
-   this.viaje.pago = this.viajeForm.get('pago').value;   
-   this.viaje.latOr = this.latitudeUno;
-   this.viaje.lonOr = this.longitudeUno;
-   this.viaje.latDes = this.latitudeDos;
-   this.viaje.lonDes = this.longitudeDos;
-   this.viaje.user = this.user;
-   this.viaje.cod_Viaje = this.viajeMod.cod_Viaje;
-
-   console.log(this.viaje);
-   console.log(this.viajeMod);
-   
-   
-    let respuesta;
-    respuesta = this.serv.ModViaje(this.viaje)
-   .then( data => {
-     if(data)
-     {    
-       console.log(respuesta);     
-                 // 
+  {
+      this.msg = "Viaje pedido con exito";
+      this.carga = true;
+      let servicio = new google.maps.DistanceMatrixService();
+      let mode = google.maps.TravelMode['DRIVING'];
+      let origen = new google.maps.LatLng(this.latitudeUno, this.longitudeDos);
+      let destino = new google.maps.LatLng(this.latitudeDos, this.longitudeDos);
+      servicio.getDistanceMatrix({
+        origins: [origen],
+        destinations: [destino],
+        travelMode: mode,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        durationInTraffic: true,
+        avoidHighways: false,
+        avoidTolls: false
+      }, (responseDis, status) => {
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+          console.log("error", status);
+        } else {
+          var distancia = responseDis.rows[0].elements[0].distance.value;
+          var costo = (distancia / 1000) * 15;
+          console.log(responseDis);
+          console.log("DISTANCIA TEXTO: " + responseDis.rows[0].elements[0].distance.text);
+          console.log("TIEMPO TEXTO: " + responseDis.rows[0].elements[0].duration.text);
+          console.log("**");
+          console.log("DISTANCIA EN METROS: " + responseDis.rows[0].elements[0].distance.value);
+          console.log("DISTANCIA EN Kilometros: " + (responseDis.rows[0].elements[0].distance.value)/1000);
+          console.log("TIEMPO EN SEGUNDOS: " + responseDis.rows[0].elements[0].duration.value);
+          this.viaje.comodidad = this.viajeForm.get('comodidad').value;
+          this.viaje.fecha = this.viajeForm.get('fecha').value;
+          this.viaje.pago = this.viajeForm.get('pago').value;   
+          this.viaje.latOr = this.latitudeUno;
+          this.viaje.lonOr = this.longitudeUno;
+          this.viaje.latDes = this.latitudeDos;
+          this.viaje.lonDes = this.longitudeDos;
+          this.viaje.costo = costo;
+          this.viaje.distancia =  responseDis.rows[0].elements[0].distance.value;         
+          this.viaje.costo = costo;
+          this.viaje.user = this.user;
+          console.log(this.viaje);
           
-         //  
-         this.msg = "Viaje modificado con exito";
-         this.info = true;
-         this.router.navigate(['/CliPrin/CliViaje'])
+          this.primeraParte = false;
+          this.segundaParte = true;   
+          let respuesta;
+          respuesta = this.serv.ModViaje(this.viaje)
+         .then( data => {
+           if(data)
+           {    
+             console.log(respuesta);     
+                       // 
+                
+               //  
+               this.msg = "Viaje modificado con exito";
+               this.info = true;
+               this.aux.pausa(5000);
+               this.router.navigate(['/CliPrin/CliViaje'])
+               
+               
+             
+           }
+           else
+           {
+             console.log(respuesta);
+             this.msg = "Error al modificar el viaje";
+             this.info = true;
+           } 
+         })
+         .catch( err => { 
+           console.error(err);
+           this.info = true;
+           this.msg = "Error de conexion"});
          
-         
-       
-     }
-     else
-     {
-       console.log(respuesta);
-       this.msg = "Error al modificar el viaje";
-       this.info = true;
-     } 
-   })
-   .catch( err => { 
-     console.error(err);
-     this.info = true;
-     this.msg = "Error de conexion"});
+          ////////////////      
+          //////////////////
+        }
+      });
+    
+          
+  }
 
-     this.primeraParte = false;
-     this.segundaParte = true;   
-         
- }
+ 
   Siguiente()
   {
     if(this.dir != undefined)

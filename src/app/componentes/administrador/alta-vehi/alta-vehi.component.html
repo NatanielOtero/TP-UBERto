@@ -21,8 +21,12 @@
           <input type="text" style="width: 100%"  placeholder="Modelo" name="modelo" [formControl]="modelo" required />   
       </div>   
 
-      
+     
+        <h5>Chofer a cargo</h5>
         <p-dropdown [options]="choferes" [formControl]="chofer"></p-dropdown>
+     
+
+      
       <br>
 
       
@@ -35,7 +39,7 @@
     
       
     <p-footer>         
-         
+         <br>
         <button pButton type="submit" label="Agregar vehiculo"  [disabled]="!vehiculoForm.valid" icon="fa-check"></button> 
         
       

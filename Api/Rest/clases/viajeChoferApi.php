@@ -12,11 +12,15 @@ class viajeChoferApi extends viajeChofer{
          $ArrayDeParametros = $request->getParsedBody();
          //var_dump($ArrayDeParametros);
          $cod_Viaje= $ArrayDeParametros['cod_Viaje'];
-         $chofer= $ArrayDeParametros['chofer'];             
+         $chofer= $ArrayDeParametros['chofer'];  
+         $fecha= $ArrayDeParametros['fecha'];
+         $cobro= $ArrayDeParametros['pago'];           
          
          $viajeChofer = new viajeChofer();
          $viajeChofer->cod_Viaje=$cod_Viaje;
          $viajeChofer->user=$chofer;
+         $viajeChofer->fecha=$fecha;
+         $viajeChofer->cobro=$cobro;
               
          $objDelaRespuesta->respuesta= $respuesta = $viajeChofer->asigViaje();     
                       

@@ -25,20 +25,20 @@ export class MenuPrincipalComponent implements OnInit {
     let payload = this.helper.decodeToken(this.token);
     this.usuario = payload.data;
     let nivel = this.usuario.nivel;
-    switch (nivel) {
-      case 1:  
-        this.router.navigate(['/AdminPrin']);  
-        break;
-      case 2:
-      this.router.navigate(['/ChofPrin']);  
-        break;
-      case 3:
-        this.router.navigate(['/CliPrin']);  
-        break;
-    
-      default:
-        break;
+    console.log(nivel);
+    if(nivel == 1)
+    {
+      this.router.navigate(['/AdminPrin']);  
     }
+    if(nivel == 2)
+    {
+      this.router.navigate(['/ChofPrin']);  
+    }
+    if(nivel == 3)
+    {
+      this.router.navigate(['/CliPrin']);  
+    }
+    
   }
   probando(){
     let usuarios ;

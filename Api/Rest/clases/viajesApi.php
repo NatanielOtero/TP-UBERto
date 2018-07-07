@@ -18,6 +18,8 @@ class viajesApi extends viajes{
          $lonOr= $ArrayDeParametros['lonOr'];
          $lonDes= $ArrayDeParametros['lonDes'];
          $user= $ArrayDeParametros['user'];
+         $cost= $ArrayDeParametros['costo'];
+         $dist= $ArrayDeParametros['distancia'];
          
          $viaje = new viajes();
          $viaje->fecha=$fe;
@@ -28,6 +30,8 @@ class viajesApi extends viajes{
          $viaje->lonOr=$lonOr;
          $viaje->lonDes=$lonDes;
          $viaje->user=$user;
+         $viaje->costo = $cost;
+         $viaje->distancia = $dist;
           
          $valido = $viaje->VerificarUser();
          if($valido)
@@ -62,23 +66,18 @@ class viajesApi extends viajes{
     public function BorrarViaje($request, $response, $args) 
     {
      	$ArrayDeParametros = $request->getParsedBody();
-     	$cod_Viaje=$ArrayDeParametros['cod_Viaje'];
-     	$viaje= new viajes();
-     	$viaje->cod_Viaje=$cod_Viaje;
-     	$cantidadDeBorrados=$viaje->bajaViaje();
+         $cod_Viaje=$ArrayDeParametros['cod_Viaje'];
+         $est=$ArrayDeParametros['estado'];
+     	 $viaje= new viajes();
+         $viaje->cod_Viaje=$cod_Viaje;
+         $viaje->estado=$est;
+         $objDelaRespuesta= new stdclass();
+         $objDelaRespuesta->respuesta= $respuesta = $viaje->bajaViaje();
 
-     	$objDelaRespuesta= new stdclass();
-	    $objDelaRespuesta->cantidad=$cantidadDeBorrados;
-	    if($cantidadDeBorrados>0)
-        {
-            $objDelaRespuesta->resultado=true;
-        }
-        else
-        {
-            $objDelaRespuesta->resultado=false;
-        }
-	    $newResponse = $response->withJson($objDelaRespuesta, 200);
-      	return $newResponse;
+     	
+	  
+         return $response->withJson($objDelaRespuesta, 200);
+      	
     }
     public function ModificarViaje($request, $response, $args) 
     {

@@ -31,6 +31,7 @@ export class AltaVehiComponent implements OnInit {
   ngOnInit() {
 
     this.choferes = new Array<SelectItem>();
+    
     this.usuarios.traerChoferes().then(data=>
     {
      for (let i = 0; i < data.length; i++) {
