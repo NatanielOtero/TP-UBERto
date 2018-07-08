@@ -96,6 +96,9 @@
 <p-dialog [(visible)]="info" [width]="300">
     {{msg}}
 </p-dialog>
+<p-dialog [(visible)]="modi"  [width]="600">
+        <app-modificar-viaje [viajeMod]="viajeMod"></app-modificar-viaje>
+    </p-dialog>
 <p-dialog header="Encuesta" [(visible)]="encues" [modal]="true" [width]="500">
    <app-encuesta [viaje]=viajeEncuesta></app-encuesta>
 </p-dialog>

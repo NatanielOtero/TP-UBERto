@@ -1,78 +1,55 @@
 <div class="banner">
-  <div style="text-align: center;margin-top: 4%;margin-left: 10%">
+    <div style="text-align: center;margin-top: 4%;text-align: center">
+      
+            <form [formGroup]="viajeForm" (ngSubmit)="Siguiente()">
+            <p-card>
+                <p-header>
+                    <h3>Ingrese las preferencias del viaje</h3>
+                </p-header>
+                <p-calendar  placeholder="Fecha" name="fecha" [showTime]="true" [formControl]="fecha"></p-calendar>
 
-  
-  <p-card title="Ingrese los nuevos datos"  [style]="{width: '90%'}" styleClass="ui-card-shadow">
-      <p-header>
-         
-      </p-header>
-      <div [hidden]="primeraParte">
-      <p-dropdown [options]="op" [(ngModel)]="opcionPunto"></p-dropdown>
-      </div>
-      <form [formGroup]="viajeForm" (ngSubmit)="Viajar()">
-        <div [hidden]="primeraParte">
-
-         
-         
-          <br>
-          <br>
-          <agm-map [latitude]="latitude" [zoom]="14" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
-            <agm-marker 
-            [latitude]="latitudeUno" 
-            [longitude]="longitudeUno"
-            *ngIf="seleccioneLocalizacionUno">
-            </agm-marker>
-            <agm-marker 
-            [latitude]="latitudeDos" 
-            [longitude]="longitudeDos"
-            *ngIf="seleccioneLocalizacionDos">
-            </agm-marker>
-            <agm-direction *ngIf="dir" [origin]="dir.origin" [panel]="directionpanel" [waypoints]="waypoints"  [destination]="dir.destination"></agm-direction>
-          </agm-map>
-        </div>
-        <div [hidden]="segundaParte" >
-            <p-calendar  placeholder="Fecha" name="fecha" [showTime]="true" [formControl]="fecha"></p-calendar>
-
+              
             
-          
-           <br>
-           <h4>Tipo de pago</h4> 
-            <div class="ui-inputgroup">
+                <br>
+                <h4>Tipo de pago</h4> 
+                 <div class="ui-inputgroup">
+                     
+                   <div style="width: 100%">
+                     <p-selectButton [options]="tipoPago" [formControl]="pago" name="pago"  required></p-selectButton>
+                   </div>         
+                  </div>
                 
-              <div style="width: 100%">
-                <p-selectButton [options]="tipoPago" [formControl]="pago" name="pago"  required></p-selectButton>
-              </div>         
-             </div>
-           
-            <h4> Nivel de comodidad</h4>
-            <div class="ui-inputgroup">
-                
-              <div style="width: 100%">
-                <p-selectButton [options]="nivelComo" [formControl]="comodidad" name="comodidad"  required></p-selectButton>
-              </div>         
-             </div>
-             <br>
-             <br>
-        </div>
-      <p-footer>
+                 <h4> Nivel de comodidad</h4>
+                 <div class="ui-inputgroup">
+                     
+                   <div style="width: 100%">
+                     <p-selectButton [options]="nivelComo" [formControl]="comodidad" name="comodidad"  required></p-selectButton>
+                   </div>         
+                  </div>
+                  <br>
+                  <br>
+                <p-footer>
+                    <button  pButton type="submit" label="Modificar" [disabled]="!viajeForm.valid" ></button>
+                </p-footer>
+            </p-card>
+            </form>
         
-          <div [hidden]="primeraParte">
-              <button  pButton type="button" label="Siguiente" (click)="Siguiente()" style="margin-right: .25em"></button>
-          </div>
-          
-          <div [hidden]="segundaParte">
-              <button  pButton type="submit" label="Pedir Viaje" [disabled]="!viajeForm.valid"  style="margin-right: .25em"></button>
-          </div>
-       
-      </p-footer>
-    </form>
-  </p-card>
+     
+     
+      
+     
+  </div>
 </div>
-</div>
-
-<p-dialog [(visible)]="info" [width]="300">
-  {{msg}}
-</p-dialog>
 <p-dialog [showHeader]="false" [(visible)]="carga" [width]="0">
   <p-progressSpinner></p-progressSpinner>
 </p-dialog>
+
+<p-dialog [(visible)]="info" [width]="300">
+    {{msg}}
+</p-dialog>
+<p-confirmDialog  icon="pi pi-exclamation-triangle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Ok" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

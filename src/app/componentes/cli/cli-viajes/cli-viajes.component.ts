@@ -24,6 +24,8 @@ export class CliViajesComponent implements OnInit {
   op : boolean = false; 
   encues = false;
   viajeEncuesta : Viaje;
+  modi = false;
+  viajeMod = new Viaje();
   
   constructor(public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService, private router : Router, route: ActivatedRoute, ) { 
     this.cols = [
@@ -80,22 +82,22 @@ export class CliViajesComponent implements OnInit {
   }
   Modificar(cod_Viaje)
   {
-    
-        var viaje : Viaje = new Viaje();
+
+        
         this.viajesP.forEach(element => {
           if(element.cod_Viaje == cod_Viaje)
           {
             console.log(element);
-            viaje = element;
+            this.viajeMod = element;
           }
         });
-        console.log(viaje);
-        if(viaje != null)
+        console.log(this.viajeMod);
+        if(this.viajeMod != null)
         {
-          if(viaje.estado == 1)
+          if(this.viajeMod.estado == 1)
           {
            
-            this.router.navigate(['/CliPrin/ModViaje',viaje]);
+            this.modi=true;
            
            
           }

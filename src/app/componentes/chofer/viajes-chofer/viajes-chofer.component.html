@@ -65,15 +65,8 @@
 </p-confirmDialog>
 
 <p-dialog  [(visible)]="verDir" [width]="400">
-        <agm-map [latitude]="latitudeUno" [zoom]="14" [longitude]="longitudeUno" >
-            <agm-marker 
-            [latitude]="latitudeUno" 
-            [longitude]="longitudeUno">
-            </agm-marker>
-            <agm-marker 
-            [latitude]="latitudeDos" 
-            [longitude]="longitudeDos">
-            </agm-marker>
-            <agm-direction *ngIf="dir" [origin]="dir.origin" [panel]="directionpanel" [waypoints]="waypoints"  [destination]="dir.destination"></agm-direction>
-          </agm-map>
-    </p-dialog>
+    <agm-map [latitude]="lat" [longitude]="lng">
+        <agm-direction [origin]="origin" [destination]="destination">
+        </agm-direction>
+      </agm-map>
+</p-dialog>

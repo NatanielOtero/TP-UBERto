@@ -4,6 +4,8 @@ import { AutheService } from '../../../servicios/authe.service';
 import { viajeCHofer } from '../../../clases/viaje-chofer';
 import { ConfirmationService } from 'primeng/api';
 import { Viaje } from '../../../clases/viaje';
+import { MapsAPILoader } from '@agm/core';
+import {  } from '@types/googlemaps';
 
 @Component({
   selector: 'app-viajes-chofer',
@@ -24,20 +26,37 @@ export class ViajesChoferComponent implements OnInit {
   longitudeUno : number = 0; 
   latitudeDos : number = 0;
   longitudeDos : number = 0; 
+  lat = 0;
+  lng = 0;
   dir = undefined;
-  
-  constructor(public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService) { }
-
+  origin = null;
+  destination = null;
+  constructor(public mapsApiLoeader : MapsAPILoader,public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService) { 
+    this.mapsApiLoeader.load();
+    this.posicionActual();
+  }
+  posicionActual()
+  {
+    navigator.geolocation.getCurrentPosition(posicion => {
+      this.lat = posicion.coords.latitude;
+      this.lng = posicion.coords.longitude;
+    })
+  }
   VerViaje(viaje)  
   {
+    
     this.service.Viajes().then(data=>{
       data.forEach(element => {
         if(viaje == element.cod_Viaje)
         {
-          this.latitudeUno = element.latOr;
-          this.longitudeUno = element.lonOr;
-          this.latitudeDos = element.latDes;
-          this.longitudeDos = element.lonDes;
+          this.latitudeUno = parseFloat(element.latOr);
+          this.longitudeUno = parseFloat(element.lonOr);
+          this.latitudeDos = parseFloat( element.latDes);
+          this.longitudeDos =  parseFloat(element.lonDes);
+          this.origin = { lat: this.latitudeUno , lng: this.longitudeUno  };
+          this.destination = { lat: this.latitudeDos, lng:  this.longitudeDos };
+          console.log(element);
+          
         }
        
       });    

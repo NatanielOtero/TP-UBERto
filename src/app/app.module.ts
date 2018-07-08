@@ -90,7 +90,8 @@ import { InformesComponent } from './componentes/administrador/informes/informes
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBGcPKjwDCPtMSuDd7KhNT9EB1lKcUcxQ0',      
+      apiKey: 'AIzaSyBGcPKjwDCPtMSuDd7KhNT9EB1lKcUcxQ0',  
+      libraries: ["places"]    
     }),
     ReactiveFormsModule,
     AgmDirectionModule 
