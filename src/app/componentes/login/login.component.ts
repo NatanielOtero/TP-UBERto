@@ -3,6 +3,7 @@ import { AutheService } from '../../servicios/authe.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../clases/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   isError = false;
   error : string = ""; 
   
+  helper = new JwtHelperService();
 
   constructor(public usuarioServ : UsuariosService, public router : Router, public routes : ActivatedRoute ) {
     this.usuario = new Usuario();
@@ -62,9 +64,23 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            console.log("ok");
-            localStorage.setItem("token",data);
-            this.router.navigate(['/Principal']);
+            let datos = this.helper.decodeToken(data);
+            if(datos.data.estado == 1)
+            {
+              console.log("ok");
+              console.log(datos.data);
+              localStorage.setItem("token",data);
+               this.router.navigate(['/Principal'])
+            }
+            else
+            {
+              console.log("not ok");
+              console.log(datos.data);
+              this.isError = true;
+              this.error = "Error del servidor";
+            }
+           
+           /* ;*/
           }        
          
         }

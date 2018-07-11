@@ -32,8 +32,7 @@ export class ViajesChoferComponent implements OnInit {
   origin = null;
   destination = null;
   constructor(public mapsApiLoeader : MapsAPILoader,public service : ViajesService,public authe : AutheService,private confirmationService: ConfirmationService) { 
-    this.mapsApiLoeader.load();
-    this.posicionActual();
+   
   }
   posicionActual()
   {
@@ -44,7 +43,8 @@ export class ViajesChoferComponent implements OnInit {
   }
   VerViaje(viaje)  
   {
-    
+    this.mapsApiLoeader.load();
+    this.posicionActual();
     this.service.Viajes().then(data=>{
       data.forEach(element => {
         if(viaje == element.cod_Viaje)
